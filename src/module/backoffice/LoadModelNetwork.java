@@ -18,7 +18,7 @@ import panda.prod.application.PandaProdApplication;
  *
  * @author Lucas
  */
-public class LoadModel implements IAction {
+public class LoadModelNetwork implements IAction {
 
     @Override
     public boolean execute(Object... object) {

@@ -17,12 +17,12 @@ import view.component.PandaProdFrame;
  *
  * @author Lucas
  */
-public class NetworkPPFrame extends PandaProdFrame {
+public class MapPPFrame extends PandaProdFrame {
 
     private JPanel mapJPanel;
     private int row, colum;
     
-    public NetworkPPFrame(int row, int colum) {
+    public MapPPFrame(int row, int colum) {
         this.row = row;
         this.colum = colum;
         initComponents(row, colum);
