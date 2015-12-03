@@ -9,6 +9,7 @@ import interfaces.action.IAction;
 import interfaces.AbstractNetworkElement;
 import java.awt.Label;
 import javax.swing.JPanel;
+import model.Fourmiliere;
 import model.Link;
 import model.Network;
 import model.Server;
@@ -18,12 +19,12 @@ import panda.prod.application.PandaProdApplication;
  *
  * @author Lucas
  */
-public class LoadModel implements IAction {
+public class LoadModelFourmis implements IAction {
 
     @Override
     public boolean execute(Object... object) {
         PandaProdApplication application = PandaProdApplication.getApplication();
-        application.setMap(new Network());
+        application.setMap(new Fourmiliere());
         application.getMap().loadMap();
         /*AbstractNetworkElement [][] network = application.getMap().getNetworkMap();
         for(int i = 0; i < network.length; i++){

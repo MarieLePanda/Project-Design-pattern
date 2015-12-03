@@ -5,13 +5,14 @@
  */
 package model;
 
+import interfaces.AbstractElement;
 import interfaces.AbstractNetworkElement;
 
 /**
  *
  * @author Lucas
  */
-public class Server extends AbstractNetworkElement{
+public class Server extends AbstractElement{
     
     
     public Server(String name){

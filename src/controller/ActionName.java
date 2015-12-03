@@ -10,7 +10,9 @@ import java.awt.Color;
 public class ActionName {
 
     public static final String ChooseSimulation = "chooseSimulation",
-            SimulationNetwork = "simulationNetwork";
+            SimulationNetwork = "simulationNetwork",
+            SimulationFourmis = "simulationFourmis";
+    
     
     public static final Color bg = new Color(1, 1, 1);
 }

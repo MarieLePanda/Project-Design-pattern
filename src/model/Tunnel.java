@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package model;
 
-package interfaces;
+import interfaces.AbstractElement;
 
 /**
  *
  * @author Lucas
  */
-public interface IAction {
-    public boolean execute(Object ... object);
+public class Tunnel extends AbstractElement {
+    
+    public Tunnel(String n){
+        this.name=n;
+    }
 }

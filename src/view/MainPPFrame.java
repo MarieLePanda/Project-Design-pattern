@@ -35,10 +35,13 @@ public class MainPPFrame extends PandaProdFrame {
     private void initComponents() {
 
         pandaProdButtonNetworkSimulation = new view.component.PandaProdButton();
+        pandaProdButtonFourmis = new view.component.PandaProdButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pandaProdButtonNetworkSimulation.setText("Simulation Réseau");
+
+        pandaProdButtonFourmis.setText("Simulation Fourmilliere");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,7 +49,9 @@ public class MainPPFrame extends PandaProdFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(127, 127, 127)
-                .addComponent(pandaProdButtonNetworkSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pandaProdButtonFourmis, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pandaProdButtonNetworkSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -54,7 +59,9 @@ public class MainPPFrame extends PandaProdFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(pandaProdButtonNetworkSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(pandaProdButtonFourmis, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,11 +103,13 @@ public class MainPPFrame extends PandaProdFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.component.PandaProdButton pandaProdButtonFourmis;
     private view.component.PandaProdButton pandaProdButtonNetworkSimulation;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void putComponents() {
         hsJcomponent.put("pandaProdButtonNetworkSimulation", pandaProdButtonNetworkSimulation);
+        hsJcomponent.put("pandaProdButtonFourmis", pandaProdButtonFourmis);
     }
 }

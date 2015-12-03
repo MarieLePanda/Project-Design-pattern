@@ -11,27 +11,7 @@ import java.util.ArrayList;
  *
  * @author Lucas
  */
-public abstract class AbstractNetworkElement {
+public abstract class AbstractNetworkElement extends AbstractElement{
     
-    protected ArrayList<AbstractNetworkElement> listPath = new ArrayList<AbstractNetworkElement>();
-    protected String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public ArrayList<AbstractNetworkElement> getListPath(){
-        return listPath;
-    }
-    
-    public void addPath(AbstractNetworkElement path){
-        listPath.add(path);
-    }    
-    public void removePath(AbstractNetworkElement path){
-        listPath.remove(path);
-    }    
+   
 }

@@ -5,8 +5,10 @@
  */
 package module.ihm;
 
-import interfaces.AbstractIHMAction;
+import interfaces.AbstractElement;
+import interfaces.action.AbstractIHMAction;
 import interfaces.AbstractNetworkElement;
+import interfaces.Plateau;
 import java.awt.Color;
 import java.awt.Label;
 import javax.swing.BorderFactory;
@@ -30,13 +32,15 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
     public boolean execute(Object... object) {
         System.err.println("Network frame initializeur");
         PandaProdApplication application = PandaProdApplication.getApplication();
-        AbstractNetworkElement[][] network = application.getMap().getNetworkMap();
+        Plateau pl = application.getMap();
+        AbstractElement[][] network = pl.getElementMap();
+       
         JPanel jpanel = (JPanel) application.getMainFrameJComponent("mapJPanel");
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         Label label;
         for (int i = 0; i < network.length; i++) {
             for (int j = 0; j < network[i].length; j++) {
-                AbstractNetworkElement element = network[i][j];
+                AbstractElement element = network[i][j];
                 label = new Label(element.getName());
                 JPanel ptest = new JPanel();
                 if (element instanceof Server) {

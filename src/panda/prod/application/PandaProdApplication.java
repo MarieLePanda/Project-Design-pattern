@@ -1,6 +1,7 @@
 package panda.prod.application;
 
 
+import interfaces.Plateau;
 import java.util.HashMap;
 
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,14 +23,14 @@ public class PandaProdApplication {
     
     private PandaProdFrame mainFrame, focusFrame;
     private final HashMap<String,Object> params;
-    private Network map;
+    private Plateau map;
     //private HashMap<String,Object> params; Compatibilité Java 7
 
-    public Network getMap() {
+    public Plateau getMap() {
         return map;
     }
 
-    public void setMap(Network map) {
+    public void setMap(Plateau map) {
         this.map = map;
     }
     

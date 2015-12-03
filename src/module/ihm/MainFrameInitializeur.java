@@ -7,7 +7,7 @@ package module.ihm;
 
 import controller.ActionName;
 import controller.Dispatcher;
-import interfaces.AbstractIHMAction;
+import interfaces.action.AbstractIHMAction;
 import panda.prod.application.PandaProdApplication;
 import view.component.PandaProdButton;
 import view.component.PandaProdFrame;
@@ -30,6 +30,10 @@ public class MainFrameInitializeur extends AbstractIHMAction{
         PandaProdButton button = (PandaProdButton) application.getMainFrameJComponent("pandaProdButtonNetworkSimulation");
         button.addActionListener(dispatcher);
         button.setActionCommand(ActionName.SimulationNetwork);
+        button = (PandaProdButton) application.getMainFrameJComponent("pandaProdButtonFourmis");
+        button.addActionListener(dispatcher);
+        button.setActionCommand(ActionName.SimulationFourmis);
+                
         
         return true;
     }

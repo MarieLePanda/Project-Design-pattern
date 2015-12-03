@@ -6,7 +6,6 @@
 package model;
 
 import interfaces.AbstractElement;
-import interfaces.AbstractNetworkElement;
 import interfaces.Plateau;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,11 +18,9 @@ import panda.prod.application.SystemSettings;
  *
  * @author Lucas
  */
-public class Network extends Plateau{
+public class Fourmiliere extends Plateau{
 
-    
-
-    
+    @Override
     public void loadMap() {
         try {
             BufferedReader file = new BufferedReader(new FileReader(
@@ -37,9 +34,9 @@ public class Network extends Plateau{
             while ((line = file.readLine()) != null) {
                 for (int c = 0; c < line.length(); c++) {
                     if (line.charAt(c) == 'S') {
-                        elementMap[l][c] = new Server("CIS" + Integer.toString(l) + Integer.toString(c));
+                        elementMap[l][c] = new Terrain("Ter"+ Integer.toString(c));
                     } else {
-                        elementMap[l][c] = new Link("Link" + Integer.toString(l) + Integer.toString(c));
+                        elementMap[l][c] = new Tunnel("Tun"+ Integer.toString(c));
                     }
 
                 }
@@ -50,10 +47,11 @@ public class Network extends Plateau{
             Logger.getLogger("FileIO").log(Level.SEVERE, "Erreur lors de la lecture du fichier de map serveur", e);
         }
         
-        createConnectNetwork();
+        createConnect();
+       
     }
     
-    public void createConnectNetwork(){
+    public void createConnect(){
         AbstractElement current;
         for(int i = 0; i < elementMap.length; i++){
             for(int j = 0; j < elementMap[i].length; j++){
