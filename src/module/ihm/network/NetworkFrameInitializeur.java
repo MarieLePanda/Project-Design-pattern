@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package module.ihm;
+package module.ihm.network;
 
 import interfaces.AbstractElement;
 import interfaces.action.AbstractIHMAction;
@@ -14,6 +14,7 @@ import java.awt.Label;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import model.network.Network;
 import model.network.Server;
 import panda.prod.application.PandaProdApplication;
 import view.component.PandaProdFrame;
@@ -32,7 +33,7 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
     public boolean execute(Object... object) {
         System.err.println("Network frame initializeur");
         PandaProdApplication application = PandaProdApplication.getApplication();
-        Plateau pl = application.getMap();
+        Network pl = (Network) application.getMap();
         AbstractElement[][] network = pl.getElementMap();
        
         JPanel jpanel = (JPanel) application.getMainFrameJComponent("mapJPanel");
@@ -43,11 +44,15 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
                 AbstractElement element = network[i][j];
                 label = new Label(element.getName());
                 JPanel ptest = new JPanel();
+                
                 if (element instanceof Server) {
                     ptest.setBackground(Color.red);
                 }
                 ptest.setBorder(blackline);
-                ptest.add(label);
+                ptest.add(element.getName(), label);
+                ptest.setName(element.getName());
+                //System.out.println(ptest.getName());
+                element.setPlace(ptest);
                 jpanel.add(ptest);
             }
         }

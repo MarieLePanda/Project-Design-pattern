@@ -12,11 +12,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import module.backoffice.LoadModelNetwork;
+import module.backoffice.network.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
+import module.backoffice.network.LaunchSimulation;
 import module.ihm.FourmisFrameInitializeur;
-import module.ihm.NetworkFrameInitializeur;
+import module.ihm.network.NetworkFrameInitializeur;
 import view.MapPPFrame;
+import view.MapPPFrame2;
 
 public class Dispatcher implements ActionListener {
 
@@ -52,10 +54,19 @@ public class Dispatcher implements ActionListener {
     }
 
     public void simulationNetworkAction() {
-        System.err.println("simulation network");
-        new LoadModelNetwork().execute();
-        application.setMainFrame(new MapPPFrame(10, 10));
-        new NetworkFrameInitializeur(application.getMainFrame()).execute();
+
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                System.err.println("simulation network");
+                new LoadModelNetwork().execute();
+                application.setMainFrame(new MapPPFrame(10, 10));
+                new NetworkFrameInitializeur(application.getMainFrame()).execute();
+                new LaunchSimulation().execute();
+            }
+
+        };
+        t.run();
     }
 
     public void simulationFourmisAction() {

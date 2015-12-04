@@ -6,6 +6,7 @@
 package interfaces;
 
 import java.util.ArrayList;
+import javax.swing.JComponent;
 
 /**
  *
@@ -15,6 +16,7 @@ public abstract class AbstractElement {
 
     protected ArrayList<AbstractElement> listPath = new ArrayList<AbstractElement>();
     protected String name;
+    protected JComponent place;
 
     public String getName() {
         return name;
@@ -35,4 +37,13 @@ public abstract class AbstractElement {
     public void removePath(AbstractNetworkElement path) {
         listPath.remove(path);
     }
+
+    public JComponent getPlace() {
+        return place;
+    }
+
+    public void setPlace(JComponent place) {
+        this.place = place;
+    }
+
 }

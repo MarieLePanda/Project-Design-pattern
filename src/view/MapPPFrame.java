@@ -5,10 +5,12 @@
  */
 package view;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Label;
 import javax.swing.BorderFactory;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import view.component.PandaProdButton;
@@ -21,6 +23,7 @@ import view.component.PandaProdFrame;
 public class MapPPFrame extends PandaProdFrame {
 
     private JPanel mapJPanel;
+    private PandaProdButton pandaProdButtonLancer;
     private int row, colum;
     
     public MapPPFrame(int row, int colum) {
@@ -34,7 +37,6 @@ public class MapPPFrame extends PandaProdFrame {
 
     private void initComponents(int row, int colum) {
         mapJPanel = new JPanel(new GridLayout(row, colum));
-        //mapJPanel.add(new PandaProdButton("Lancer"));
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         mapJPanel.setBorder(blackline);
         this.add(mapJPanel);

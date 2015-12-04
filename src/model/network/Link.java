@@ -5,14 +5,13 @@
  */
 package model.network;
 
-import interfaces.AbstractElement;
 import interfaces.AbstractNetworkElement;
 
 /**
  *
  * @author Lucas
  */
-public class Link extends AbstractElement{
+public class Link extends AbstractNetworkElement{
         
     public Link(String name){
         this.name = name;
