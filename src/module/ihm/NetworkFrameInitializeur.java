@@ -14,7 +14,7 @@ import java.awt.Label;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import model.Server;
+import model.network.Server;
 import panda.prod.application.PandaProdApplication;
 import view.component.PandaProdFrame;
 

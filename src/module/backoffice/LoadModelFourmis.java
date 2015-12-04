@@ -9,10 +9,10 @@ import interfaces.action.IAction;
 import interfaces.AbstractNetworkElement;
 import java.awt.Label;
 import javax.swing.JPanel;
-import model.Fourmiliere;
-import model.Link;
-import model.Network;
-import model.Server;
+import model.fourmis.Fourmiliere;
+import model.network.Link;
+import model.network.Network;
+import model.network.Server;
 import panda.prod.application.PandaProdApplication;
 
 /**

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Lucas
  */
-public abstract class AbstractNetworkElement extends AbstractElement{
-    
-   
+public abstract class AbstractNetworkElement extends AbstractElement {
+
+    public abstract void receiveMessage(String message, String nomTarget);
 }
