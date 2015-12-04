@@ -21,9 +21,6 @@ import panda.prod.application.SystemSettings;
  */
 public class Network extends Plateau{
 
-    
-
-    
     public void loadMap() {
         try {
             BufferedReader file = new BufferedReader(new FileReader(
@@ -68,7 +65,6 @@ public class Network extends Plateau{
                     if(j < elementMap[i].length-1){
                         current.addPath(elementMap[i][j+1]);
                     }
-                    
                 }
             }
         }

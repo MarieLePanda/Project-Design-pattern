@@ -38,7 +38,6 @@ public class Fourmiliere extends Plateau{
                     } else {
                         elementMap[l][c] = new Tunnel("Tun"+ Integer.toString(c));
                     }
-
                 }
                 l++;
             }
