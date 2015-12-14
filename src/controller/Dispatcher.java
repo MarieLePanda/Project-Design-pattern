@@ -54,19 +54,11 @@ public class Dispatcher implements ActionListener {
     }
 
     public void simulationNetworkAction() {
-
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                System.err.println("simulation network");
-                new LoadModelNetwork().execute();
-                application.setMainFrame(new MapPPFrame(10, 10));
-                new NetworkFrameInitializeur(application.getMainFrame()).execute();
-                new LaunchSimulation().execute();
-            }
-
-        };
-        t.run();
+        System.err.println("simulation network");
+        new LoadModelNetwork().execute();
+        application.setMainFrame(new MapPPFrame(10, 10));
+        new NetworkFrameInitializeur(application.getMainFrame()).execute();
+        new LaunchSimulation().execute();
     }
 
     public void simulationFourmisAction() {

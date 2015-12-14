@@ -21,13 +21,19 @@ public abstract class AbstractNetworkElement extends AbstractElement {
     public void sendMessage(Message message) {
         if (message.isValid()) {
             for (AbstractElement element : listPath) {
-                AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
-                networkElement.receiveMessage(message);
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ex) {
-                    System.err.println("ERREUR THREAD");
+                    Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
+                        networkElement.receiveMessage(message);
+                    }
+                };
+                t.start();
 
             }
         }
@@ -35,15 +41,17 @@ public abstract class AbstractNetworkElement extends AbstractElement {
 
     public void receiveMessage(Message message) {
         //System.out.println(this.place.getName());
-        place.setBackground(Color.yellow);
-        if (message.getTarget().getName().equals(name) && message.isValid()) {
-            System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.getContenue());
-            place.setBackground(Color.green);
-            message.ignoreMessage();
+        if (message.isValid()) {
+            if (message.getTarget().getName().equals(name)) {
+                System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.getContenue());
+                place.setBackground(Color.green);
+            } else {
+                place.setBackground(Color.yellow);
+                sendMessage(message);
+            }
         } else {
-            sendMessage(message);
-            //this.place.setBackground(Color.gray);
+            message.ignoreMessage();
         }
-        //new TransfertMessage(PandaProdApplication.getApplication().getMainFrame()).execute(this);
     }
+
 }
