@@ -17,26 +17,26 @@ import java.util.logging.Logger;
 public abstract class AbstractNetworkElement extends AbstractElement {
 
     public void sendMessage(Message message) {
-        if (message.isValid()) {
-            for (AbstractElement element : listPath) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Thread t = new Thread() {
-                    
-                    @Override
-                    public void run() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                if (message.isValid()) {
+                    for (AbstractElement element : listPath) {
                         AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
                         networkElement.receiveMessage(message);
                     }
-                };
-                t.start();
 
+                }
+            
             }
+            };
+        t.start();
         }
-    }
 
     public void receiveMessage(Message message) {
         //System.out.println(this.place.getName());
