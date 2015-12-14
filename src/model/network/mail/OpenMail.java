@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.network;
+package model.network.mail;
 
-import model.network.interfaces.AbstractNetworkElement;
+import model.network.interfaces.Open;
 
 /**
  *
  * @author Lucas
  */
-public class Server extends AbstractNetworkElement {
+public class OpenMail extends Open{
 
-    private String message;
-
-    public Server(String name) {
-        this.name = name;
+    @Override
+    public String open() {
+        return "Vous avez ouvert un mail ! ";
     }
+    
 }

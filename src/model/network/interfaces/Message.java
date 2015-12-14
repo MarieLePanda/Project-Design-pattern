@@ -3,20 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.network;
+package model.network.interfaces;
 
-import interfaces.AbstractElement;
-import interfaces.AbstractNetworkElement;
+import model.network.Server;
 
 /**
  *
  * @author Lucas
  */
-public class Message {
+public abstract class Message {
 
-    private Server target, starter; 
-    private String contenue;
-    private boolean valid;
+    protected Server target, starter; 
+    protected String contenue;
+    protected boolean valid;
+    protected Open open;
+    
+    public String open(){
+        return open.open();
+    }
     
     public Server getTarget() {
         return target;

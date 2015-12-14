@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import model.network.interfaces.AbstractNetworkElement;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 

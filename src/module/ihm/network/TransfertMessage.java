@@ -6,7 +6,7 @@
 package module.ihm.network;
 
 import interfaces.AbstractElement;
-import interfaces.AbstractNetworkElement;
+import model.network.interfaces.AbstractNetworkElement;
 import interfaces.action.AbstractIHMAction;
 import java.awt.Color;
 import java.awt.Component;

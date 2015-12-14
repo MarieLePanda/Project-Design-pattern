@@ -6,7 +6,6 @@
 package model.network;
 
 import interfaces.AbstractElement;
-import interfaces.AbstractNetworkElement;
 import interfaces.Plateau;
 import java.io.BufferedReader;
 import java.io.FileReader;
