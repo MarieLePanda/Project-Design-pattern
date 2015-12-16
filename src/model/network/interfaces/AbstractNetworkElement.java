@@ -43,6 +43,7 @@ public abstract class AbstractNetworkElement extends AbstractElement {
         if (message.isValid()) {
             if (message.getTarget().getName().equals(name)) {
                 System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
+                message.ignoreMessage();
                 place.setBackground(Color.green);
             } else {
                 place.setBackground(Color.yellow);
