@@ -19,6 +19,7 @@ public abstract class Message {
     protected Open open;
     
     public String open(){
+        valid = false;
         return open.open();
     }
     
@@ -58,7 +59,4 @@ public abstract class Message {
         return valid;
     }
     
-    public void ignoreMessage(){
-        valid = false;
-    }
 }

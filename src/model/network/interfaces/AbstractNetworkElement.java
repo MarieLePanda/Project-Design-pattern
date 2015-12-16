@@ -17,11 +17,6 @@ import java.util.logging.Logger;
 public abstract class AbstractNetworkElement extends AbstractElement {
 
     public void sendMessage(Message message) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
-        }
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -32,25 +27,29 @@ public abstract class AbstractNetworkElement extends AbstractElement {
                     }
 
                 }
-            
+
             }
-            };
+        };
         t.start();
-        }
+    }
 
     public void receiveMessage(Message message) {
         //System.out.println(this.place.getName());
         if (message.isValid()) {
             if (message.getTarget().getName().equals(name)) {
+                System.err.println(message);
                 System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
-                message.ignoreMessage();
                 place.setBackground(Color.green);
             } else {
                 place.setBackground(Color.yellow);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                place.setBackground(null);
                 sendMessage(message);
             }
-        } else {
-            message.ignoreMessage();
         }
     }
 

@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.network.interfaces;
+package model.network.virus;
+
+import model.network.interfaces.Open;
 
 /**
  *
  * @author Lucas
  */
-public class Send {
+public class OpenVirus extends Open {
+
+    @Override
+    public String open() {
+        return "Oups, vous n'auriez pas du !";
+    }
     
 }
