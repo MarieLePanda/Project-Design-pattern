@@ -7,7 +7,7 @@ package interfaces;
 
 import model.network.interfaces.AbstractNetworkElement;
 import java.util.ArrayList;
-import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,7 +17,7 @@ public abstract class AbstractElement {
 
     protected ArrayList<AbstractElement> listPath = new ArrayList<AbstractElement>();
     protected String name;
-    protected JComponent place;
+    protected JLabel place;
 
     public String getName() {
         return name;
@@ -39,11 +39,11 @@ public abstract class AbstractElement {
         listPath.remove(path);
     }
 
-    public JComponent getPlace() {
+    public JLabel getPlace() {
         return place;
     }
 
-    public void setPlace(JComponent place) {
+    public void setPlace(JLabel place) {
         this.place = place;
     }
 

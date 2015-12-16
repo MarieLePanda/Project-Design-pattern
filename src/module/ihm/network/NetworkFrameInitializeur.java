@@ -12,6 +12,7 @@ import interfaces.Plateau;
 import java.awt.Color;
 import java.awt.Label;
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import model.network.Network;
@@ -38,22 +39,25 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
        
         JPanel jpanel = (JPanel) application.getMainFrameJComponent("mapJPanel");
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
-        Label label;
+        JLabel label;
         for (int i = 0; i < network.length; i++) {
             for (int j = 0; j < network[i].length; j++) {
                 AbstractElement element = network[i][j];
-                label = new Label(element.getName());
+                label = new JLabel(element.getName());
+                
                 JPanel ptest = new JPanel();
                 
                 if (element instanceof Server) {
                     ptest.setBackground(Color.red);
                 }
+                
                 ptest.setBorder(blackline);
                 ptest.add(element.getName(), label);
                 ptest.setName(element.getName());
                 //System.out.println(ptest.getName());
-                element.setPlace(ptest);
+                element.setPlace(label);
                 jpanel.add(ptest);
+                
             }
         }
 

@@ -9,6 +9,7 @@ import interfaces.AbstractElement;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -39,15 +40,22 @@ public abstract class AbstractNetworkElement extends AbstractElement {
             if (message.getTarget().getName().equals(name)) {
                 System.err.println(message);
                 System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
-                place.setBackground(Color.green);
-            } else {
-                place.setBackground(Color.yellow);
+                place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
+
+                try {
+                    Thread.sleep(500);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 place.setBackground(null);
+                place.setIcon(null);
                 sendMessage(message);
             }
         }
