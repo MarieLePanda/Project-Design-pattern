@@ -101,7 +101,7 @@ public class PandaProdApplication {
     public static PandaProdApplication getApplication() {
         if(application == null) {
             application = new PandaProdApplication();
-        }
+        }   
         return application;
     }
     

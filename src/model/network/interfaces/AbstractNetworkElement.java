@@ -34,29 +34,33 @@ public abstract class AbstractNetworkElement extends AbstractElement {
         t.start();
     }
 
-    public void receiveMessage(Message message) {
-        //System.out.println(this.place.getName());
-        if (message.isValid()) {
-            if (message.getTarget().getName().equals(name)) {
-                System.err.println(message);
-                System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
-                place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
+    public void processingMessage() {
+        if (!listMessage.isEmpty()) {
+            Message message = listMessage.remove(0);
+            System.out.println(this.place.getName());
+            if (message.isValid()) {
+                if (message.getTarget().getName().equals(name)) {
+                    System.err.println(message);
+                    System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
+                    place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    System.err.println("je transmet");
+                    place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    //place.setBackground(null);
+                    //place.setIcon(null);
+                    sendMessage(message);
                 }
-                place.setBackground(null);
-                place.setIcon(null);
-                sendMessage(message);
             }
         }
     }

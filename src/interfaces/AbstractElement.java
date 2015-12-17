@@ -8,6 +8,7 @@ package interfaces;
 import model.network.interfaces.AbstractNetworkElement;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import model.network.interfaces.Message;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 public abstract class AbstractElement {
 
     protected ArrayList<AbstractElement> listPath = new ArrayList<AbstractElement>();
+    protected ArrayList<Message> listMessage = new ArrayList<>();
     protected String name;
     protected JLabel place;
 
@@ -31,6 +33,10 @@ public abstract class AbstractElement {
         return listPath;
     }
 
+    public void receiveMessage(Message message){
+        listMessage.add(message);
+    }
+    
     public void addPath(AbstractElement path) {
         listPath.add(path);
     }
