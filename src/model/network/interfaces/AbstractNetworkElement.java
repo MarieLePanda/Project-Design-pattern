@@ -18,26 +18,27 @@ import javax.swing.ImageIcon;
 public abstract class AbstractNetworkElement extends AbstractElement {
 
     public void sendMessage(Message message) {
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                if (message.isValid()) {
-                    for (AbstractElement element : listPath) {
-                        AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
-                        networkElement.receiveMessage(message);
-                    }
-
-                }
-
+        /*Thread t = new Thread() {
+         @Override
+         public void run() {
+         */ if (message.isValid()) {
+            for (AbstractElement element : listPath) {
+                AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
+                networkElement.receiveMessage(message);
             }
-        };
-        t.start();
+
+        }
+
+        /*}
+         };
+         t.start();*/
     }
 
     public void processingMessage() {
+
         if (!listMessage.isEmpty()) {
             Message message = listMessage.remove(0);
-            System.out.println(this.place.getName());
+            System.out.println(place.getName());
             if (message.isValid()) {
                 if (message.getTarget().getName().equals(name)) {
                     System.err.println(message);
@@ -49,7 +50,6 @@ public abstract class AbstractNetworkElement extends AbstractElement {
                         Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
-                    System.err.println("je transmet");
                     place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
 
                     try {
