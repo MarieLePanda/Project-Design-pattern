@@ -7,6 +7,7 @@ package model.network.interfaces;
 
 import interfaces.AbstractElement;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -17,52 +18,51 @@ import javax.swing.ImageIcon;
  */
 public abstract class AbstractNetworkElement extends AbstractElement {
 
-    public void sendMessage(Message message) {
-        /*Thread t = new Thread() {
-         @Override
-         public void run() {
-         */ if (message.isValid()) {
-            for (AbstractElement element : listPath) {
-                AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
-                networkElement.receiveMessage(message);
-            }
+    private ArrayList<Message> listMessageReceive = new ArrayList<>();
+    private ArrayList<Message> listMessageToSend = new ArrayList<>();
 
-        }
-
-        /*}
-         };
-         t.start();*/
+    public void receiveMessage(Message message) {
+        listMessageReceive.add(message);
     }
 
-    public void processingMessage() {
+    public void sendMessage(Message message) {
+        listMessageToSend.add(message);
 
-        if (!listMessage.isEmpty()) {
-            Message message = listMessage.remove(0);
-            System.out.println(place.getName());
+    }
+
+    public void processingMessageReceive() {
+        if (!listMessageReceive.isEmpty()) {
+            Message message = listMessageReceive.remove(0);
             if (message.isValid()) {
+
                 if (message.getTarget().getName().equals(name)) {
-                    System.err.println(message);
+                    System.err.println(message.contenue);
                     System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
                     place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+
                 } else {
                     place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
 
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AbstractNetworkElement.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    //place.setBackground(null);
+                            //place.setBackground(null);
                     //place.setIcon(null);
                     sendMessage(message);
                 }
             }
         }
+    }
+
+    public void processingMessageToSend() {
+
+        for (Message message : listMessageToSend) {
+            if (message.isValid()) {
+                for (AbstractElement element : listPath) {
+                    AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
+                    networkElement.receiveMessage(message);
+                }
+            }
+        }
+        listMessageToSend.clear();
+        place.setIcon(null);
     }
 
 }

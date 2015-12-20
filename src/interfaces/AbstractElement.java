@@ -17,7 +17,6 @@ import model.network.interfaces.Message;
 public abstract class AbstractElement {
 
     protected ArrayList<AbstractElement> listPath = new ArrayList<AbstractElement>();
-    protected ArrayList<Message> listMessage = new ArrayList<>();
     protected String name;
     protected JLabel place;
 
@@ -31,10 +30,6 @@ public abstract class AbstractElement {
 
     public ArrayList<AbstractElement> getListPath() {
         return listPath;
-    }
-
-    public void receiveMessage(Message message){
-        listMessage.add(message);
     }
     
     public void addPath(AbstractElement path) {

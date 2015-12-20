@@ -5,6 +5,7 @@
  */
 package module.ihm.network;
 
+import controller.Dispatcher;
 import interfaces.AbstractElement;
 import interfaces.action.AbstractIHMAction;
 import model.network.interfaces.AbstractNetworkElement;
@@ -18,6 +19,7 @@ import javax.swing.border.Border;
 import model.network.Network;
 import model.network.Server;
 import panda.prod.application.PandaProdApplication;
+import view.component.PandaProdButton;
 import view.component.PandaProdFrame;
 
 /**
@@ -25,18 +27,22 @@ import view.component.PandaProdFrame;
  * @author Lucas
  */
 public class NetworkFrameInitializeur extends AbstractIHMAction {
-
+    
     public NetworkFrameInitializeur(PandaProdFrame csFrame) {
         super(csFrame);
     }
-
+    
     @Override
     public boolean execute(Object... object) {
         System.err.println("Network frame initializeur");
         PandaProdApplication application = PandaProdApplication.getApplication();
+        PandaProdButton boutton = (PandaProdButton) application.getMainFrameJComponent("pandaProdButtonLancer");
+        boutton.addActionListener(Dispatcher.getDispatcher());
+        boutton.setActionCommand("nextStep");
+        
         Network pl = (Network) application.getMap();
         AbstractElement[][] network = pl.getElementMap();
-       
+        
         JPanel jpanel = (JPanel) application.getMainFrameJComponent("mapJPanel");
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         JLabel label;
@@ -60,9 +66,9 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
                 
             }
         }
-
+        
         application.getMainFrame().refresh();
         return true;
     }
-
+    
 }

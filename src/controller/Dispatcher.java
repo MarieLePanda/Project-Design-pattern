@@ -5,6 +5,7 @@
  */
 package controller;
 
+import interfaces.AbstractElement;
 import panda.prod.application.PandaProdApplication;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.network.Network;
+import model.network.interfaces.AbstractNetworkElement;
 import module.backoffice.network.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
 import module.backoffice.network.LaunchSimulation;
@@ -59,6 +62,22 @@ public class Dispatcher implements ActionListener {
         application.setMainFrame(new MapPPFrame(10, 10));
         new NetworkFrameInitializeur(application.getMainFrame()).execute();
         new LaunchSimulation().execute();
+    }
+
+    public void nextStepAction() {
+        System.err.println("Next step");
+        PandaProdApplication application = PandaProdApplication.getApplication();
+        Network pl = (Network) application.getMap();
+        AbstractElement[][] network = (AbstractElement[][]) pl.getElementMap();
+
+        for (int i = 0; i < network.length; i++) {
+            for (int j = 1; j < network[i].length; j++) {
+                AbstractNetworkElement networkElement = (AbstractNetworkElement) network[i][j];
+                networkElement.processingMessageToSend();
+                networkElement.processingMessageReceive();
+            }
+        }
+
     }
 
     public void simulationFourmisAction() {

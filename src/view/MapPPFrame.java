@@ -39,7 +39,12 @@ public class MapPPFrame extends PandaProdFrame {
         mapJPanel = new JPanel(new GridLayout(row, colum));
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         mapJPanel.setBorder(blackline);
+        pandaProdButtonLancer = new PandaProdButton("Lancer");
+        JMenuBar menu = new JMenuBar();
+        menu.add(pandaProdButtonLancer);
+        this.setJMenuBar(menu);
         this.add(mapJPanel);
+        
     }
 
     @Override
@@ -47,6 +52,7 @@ public class MapPPFrame extends PandaProdFrame {
         hsJcomponent.put("mapJPanel", mapJPanel);
         hsJcomponent.put("row", row);
         hsJcomponent.put("colum", colum);
+        hsJcomponent.put("pandaProdButtonLancer", pandaProdButtonLancer);
         
     }
 

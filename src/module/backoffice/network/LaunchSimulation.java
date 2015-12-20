@@ -29,23 +29,12 @@ public class LaunchSimulation implements IAction {
         AbstractElement[][] network = (AbstractElement[][]) pl.getElementMap();
         AbstractNetworkElement networkElement = (AbstractNetworkElement) network[0][0];
         networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda", (Server) network[2][5]));
-        Thread t = new Thread() {
-            @Override
-            public void run() {
+        networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda", (Server) network[8][5]));
+        networkElement.processingMessageToSend();
 
-                for (int i = 0; i < network.length; i++) {
-                    for (int j = 1; j < network[i].length; j++) {
-                        networkElement = (AbstractNetworkElement) network[i][j];
-                        networkElement.processingMessage();
-                    }
-                }
-            }
-        };
-        t.start();
-
-        //networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda", (Server) network[8][5]));
         //networkElement.sendMessage(new virus((Server) networkElement, "Hello panda",(Server) network[3][5]));
         return true;
+
     }
 
 }
