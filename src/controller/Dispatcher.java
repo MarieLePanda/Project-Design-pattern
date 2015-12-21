@@ -18,6 +18,7 @@ import model.network.interfaces.AbstractNetworkElement;
 import module.backoffice.network.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
 import module.backoffice.network.LaunchSimulation;
+import module.backoffice.network.SimulationInProgress;
 import module.ihm.FourmisFrameInitializeur;
 import module.ihm.network.NetworkFrameInitializeur;
 import view.MapPPFrame;
@@ -66,17 +67,7 @@ public class Dispatcher implements ActionListener {
 
     public void nextStepAction() {
         System.err.println("Next step");
-        PandaProdApplication application = PandaProdApplication.getApplication();
-        Network pl = (Network) application.getMap();
-        AbstractElement[][] network = (AbstractElement[][]) pl.getElementMap();
-
-        for (int i = 0; i < network.length; i++) {
-            for (int j = 1; j < network[i].length; j++) {
-                AbstractNetworkElement networkElement = (AbstractNetworkElement) network[i][j];
-                networkElement.processingMessageToSend();
-                networkElement.processingMessageReceive();
-            }
-        }
+        new SimulationInProgress().execute();
 
     }
 

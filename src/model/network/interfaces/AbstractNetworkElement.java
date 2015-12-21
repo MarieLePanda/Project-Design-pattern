@@ -6,11 +6,11 @@
 package model.network.interfaces;
 
 import interfaces.AbstractElement;
-import java.awt.Color;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.swing.ImageIcon;
+import model.network.Dijkstra;
+import model.network.Edge;
 
 /**
  *
@@ -18,8 +18,33 @@ import javax.swing.ImageIcon;
  */
 public abstract class AbstractNetworkElement extends AbstractElement {
 
+    private double distance = Double.POSITIVE_INFINITY;
+    private ArrayList<Edge> edges = new ArrayList<Edge>();
+    private boolean actif = false;
+
     private ArrayList<Message> listMessageReceive = new ArrayList<>();
     private ArrayList<Message> listMessageToSend = new ArrayList<>();
+    public AbstractNetworkElement previous;
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        if (this.distance == Double.POSITIVE_INFINITY) {
+            this.distance = 0;
+        }
+        this.distance += distance;
+    }
+
+    public void setEdges(List<Edge> edges) {
+        //this.edges = edges;
+        this.edges.clear();
+    }
+
+    public ArrayList<Edge> getEdge() {
+        return edges;
+    }
 
     public void receiveMessage(Message message) {
         listMessageReceive.add(message);
@@ -43,7 +68,7 @@ public abstract class AbstractNetworkElement extends AbstractElement {
                 } else {
                     place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
 
-                            //place.setBackground(null);
+                    //place.setBackground(null);
                     //place.setIcon(null);
                     sendMessage(message);
                 }
@@ -55,14 +80,26 @@ public abstract class AbstractNetworkElement extends AbstractElement {
 
         for (Message message : listMessageToSend) {
             if (message.isValid()) {
-                for (AbstractElement element : listPath) {
-                    AbstractNetworkElement networkElement = (AbstractNetworkElement) element;
-                    networkElement.receiveMessage(message);
+                AbstractNetworkElement arrive = Dijkstra.findeBestWay(this, message.target.getName());
+                while (arrive.previous != this) {
+                    System.out.println("Depart " + arrive.getName());
+
+                    arrive = arrive.previous;
+                    System.out.println(this.getName());
                 }
+                System.out.println("Je dois partir en " + arrive.getName());
+                arrive.receiveMessage(message);
             }
         }
         listMessageToSend.clear();
         place.setIcon(null);
     }
 
+    public boolean isActif() {
+        return actif;
+    }
+
+    public void setActif(boolean actif) {
+        this.actif = actif;
+    }
 }

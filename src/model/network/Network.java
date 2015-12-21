@@ -12,17 +12,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.network.interfaces.AbstractNetworkElement;
 import panda.prod.application.SystemSettings;
 
 /**
  *
  * @author Lucas
  */
-public class Network extends Plateau{
+public class Network extends Plateau {
 
-    
-
-    
     public void loadMap() {
         try {
             BufferedReader file = new BufferedReader(new FileReader(
@@ -32,7 +30,7 @@ public class Network extends Plateau{
             ));
             String line;
             int l = 0;
-                
+
             while ((line = file.readLine()) != null) {
                 for (int c = 0; c < line.length(); c++) {
                     if (line.charAt(c) == 'S') {
@@ -48,28 +46,60 @@ public class Network extends Plateau{
         } catch (IOException e) {
             Logger.getLogger("FileIO").log(Level.SEVERE, "Erreur lors de la lecture du fichier de map serveur", e);
         }
-        
+
         createConnectNetwork();
     }
-    
-    public void createConnectNetwork(){
-        AbstractElement current;
-        for(int i = 0; i < elementMap.length; i++){
-            for(int j = 0; j < elementMap[i].length; j++){
-                current = elementMap[i][j];
-                if(i < 9){
-                    if(j < elementMap[i].length-1){
-                        current.addPath( elementMap[i][j+1]);
+
+    public void createConnectNetwork() {
+        System.err.println("create connect");
+        for (int i = 0; i < elementMap.length; i++) {
+            for (int j = 0; j < elementMap[i].length; j++) {
+                if (i == 0) {
+                    if (j == 0) {
+                        new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                        new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
+
+                    } else {
+                        if (j < elementMap[i].length - 1) {
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                        }
+                        new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
+                        new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
+
                     }
-                    current.addPath(elementMap[i+1][j]);
-                    
-                }else{
-                    if(j < elementMap[i].length-1){
-                        current.addPath(elementMap[i][j+1]);
+                } else {
+                    if (i == elementMap.length - 1) {
+                        if (j == 0) {
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                        } else {
+                            if (j < elementMap[i].length - 1) {
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                            }
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                        }
+                    } else {
+                        if (j == 0) {
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
+                            new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                        } else {
+                            if (j == elementMap[i].length - 1) {
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                            } else {
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
+                                new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                            }
+                        }
                     }
-                    
                 }
             }
         }
+
     }
 }

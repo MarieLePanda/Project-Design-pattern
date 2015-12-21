@@ -6,12 +6,7 @@
 package module.backoffice.network;
 
 import interfaces.action.IAction;
-import model.network.interfaces.AbstractNetworkElement;
-import java.awt.Label;
-import javax.swing.JPanel;
-import model.network.Link;
 import model.network.Network;
-import model.network.Server;
 import panda.prod.application.PandaProdApplication;
 
 /**
