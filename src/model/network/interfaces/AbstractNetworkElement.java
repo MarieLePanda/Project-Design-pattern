@@ -57,27 +57,29 @@ public abstract class AbstractNetworkElement extends AbstractElement {
 
     public void processingMessageReceive() {
         if (!listMessageReceive.isEmpty()) {
-            Message message = listMessageReceive.remove(0);
-            if (message.isValid()) {
+            for (Message message : listMessageReceive) {
+                if (message.isValid()) {
 
-                if (message.getTarget().getName().equals(name)) {
-                    System.err.println(message.contenue);
-                    System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
-                    place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
+                    if (message.getTarget().getName().equals(name)) {
+                        System.err.println(message.contenue);
+                        System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
+                        place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
 
-                } else {
-                    place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
-                    System.err.println("Je vais renvoyer le message");
-                    //place.setBackground(null);
-                    //place.setIcon(null);
-                    sendMessage(message);
+                    } else {
+                        place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
+                        System.err.println("Je vais renvoyer le message");
+                        //place.setBackground(null);
+                        //place.setIcon(null);
+                        sendMessage(message);
+                    }
                 }
             }
+            listMessageReceive.clear();
         }
     }
 
     public void processingMessageToSend() {
-        
+
         for (Message message : listMessageToSend) {
             System.err.println("this " + this.getName() + " destinataire : " + message.target.name);
             if (message.isValid()) {

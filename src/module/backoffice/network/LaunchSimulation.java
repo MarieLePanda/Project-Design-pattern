@@ -29,12 +29,12 @@ public class LaunchSimulation implements IAction {
         AbstractElement[][] network = (AbstractElement[][]) pl.getElementMap();
         AbstractNetworkElement networkElement = (AbstractNetworkElement) network[4][0];
         networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda 0", (Server) network[0][0]));
-        networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda 1", (Server) network[4][5]));
-        networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda 2", (Server) network[9][0]));
+        networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda 1", (Server) network[0][0]));
+        //networkElement.sendMessage(new Mail((Server) networkElement, "Hello panda 2", (Server) network[9][0]));
         //networkElement.sendMessage(new virus((Server) networkElement, "Hello panda",(Server) network[3][5]));
-        networkElement = (AbstractNetworkElement) network[4][5];
-        networkElement.sendMessage(new Mail((Server) networkElement, "Hello firefox 0", (Server) network[0][0]));
-        networkElement.sendMessage(new Mail((Server) networkElement, "Hello firefox 2", (Server) network[9][0]));
+        //networkElement = (AbstractNetworkElement) network[4][5];
+        //networkElement.sendMessage(new Mail((Server) networkElement, "Hello firefox 0", (Server) network[1][5]));
+        //networkElement.sendMessage(new Mail((Server) networkElement, "Hello firefox 2", (Server) network[8][5]));
 
         return true;
 
