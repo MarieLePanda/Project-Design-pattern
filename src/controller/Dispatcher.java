@@ -67,7 +67,7 @@ public class Dispatcher implements ActionListener {
         new FourmisFrameInitializeur(application.getMainFrame()).execute();
     }
     public void simulationCastlefightAction() {
-           System.err.println("simulation Castlefight");
+           System.err.println("TOWER DEFENSE");
            new LoadModelCastle().execute();
            application.setMainFrame(new MapPPFrame(10, 10));
            new CastlefightFrameInitializeur(application.getMainFrame()).execute();

@@ -7,10 +7,7 @@ package interfaces;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Lucas
- */
+
 public abstract class AbstractElement {
 
     protected ArrayList<AbstractElement> listPath = new ArrayList<AbstractElement>();
