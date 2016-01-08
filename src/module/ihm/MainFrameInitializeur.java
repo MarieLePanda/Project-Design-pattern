@@ -8,6 +8,7 @@ package module.ihm;
 import controller.ActionName;
 import controller.Dispatcher;
 import interfaces.action.AbstractIHMAction;
+import javax.swing.JButton;
 import panda.prod.application.PandaProdApplication;
 import view.component.PandaProdButton;
 import view.component.PandaProdFrame;
@@ -33,7 +34,9 @@ public class MainFrameInitializeur extends AbstractIHMAction{
         button = (PandaProdButton) application.getMainFrameJComponent("pandaProdButtonFourmis");
         button.addActionListener(dispatcher);
         button.setActionCommand(ActionName.SimulationFourmis);
-                
+        button = (PandaProdButton) application.getMainFrameJComponent("pandaProdButtonCastlefight");
+        button.addActionListener(dispatcher);
+        button.setActionCommand(ActionName.SimulationCastlefight);        
         
         return true;
     }

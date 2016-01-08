@@ -26,6 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="buttonCastlefight" min="-2" pref="94" max="-2" attributes="0"/>
                   <Component id="pandaProdButtonFourmis" min="-2" pref="94" max="-2" attributes="0"/>
                   <Component id="pandaProdButtonNetworkSimulation" min="-2" pref="94" max="-2" attributes="0"/>
               </Group>
@@ -40,7 +41,9 @@
               <Component id="pandaProdButtonNetworkSimulation" min="-2" pref="18" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Component id="pandaProdButtonFourmis" min="-2" pref="18" max="-2" attributes="0"/>
-              <EmptySpace pref="114" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <Component id="buttonCastlefight" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,6 +57,11 @@
     <Component class="view.component.PandaProdButton" name="pandaProdButtonFourmis">
       <Properties>
         <Property name="text" type="java.lang.String" value="Simulation Fourmilliere"/>
+      </Properties>
+    </Component>
+    <Component class="view.component.PandaProdButton" name="buttonCastlefight">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Simulation Combat"/>
       </Properties>
     </Component>
   </SubComponents>

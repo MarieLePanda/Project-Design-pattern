@@ -12,8 +12,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import module.backoffice.LoadModelCastle;
 import module.backoffice.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
+import module.ihm.CastlefightFrameInitializeur;
 import module.ihm.FourmisFrameInitializeur;
 import module.ihm.NetworkFrameInitializeur;
 import view.MapPPFrame;
@@ -64,5 +66,10 @@ public class Dispatcher implements ActionListener {
         application.setMainFrame(new MapPPFrame(10, 10));
         new FourmisFrameInitializeur(application.getMainFrame()).execute();
     }
-
+    public void simulationCastlefightAction() {
+           System.err.println("simulation Castlefight");
+           new LoadModelCastle().execute();
+           application.setMainFrame(new MapPPFrame(10, 10));
+           new CastlefightFrameInitializeur(application.getMainFrame()).execute();
+       }
 }
