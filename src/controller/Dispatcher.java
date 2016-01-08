@@ -63,6 +63,7 @@ public class Dispatcher implements ActionListener {
         application.setMainFrame(new MapPPFrame(10, 10));
         new NetworkFrameInitializeur(application.getMainFrame()).execute();
         new LaunchSimulation().execute();
+        
     }
 
     public void nextStepAction() {

@@ -5,10 +5,11 @@
  */
 package model.network;
 
-
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import model.network.interfaces.AbstractNetworkElement;
+import panda.prod.application.PandaProdApplication;
 
 /**
  *
@@ -16,48 +17,58 @@ import model.network.interfaces.AbstractNetworkElement;
  */
 public class Dijkstra {
 
-
     /**
      * Enable find the shorter way at T instant
+     *
      * @param start Start node
      * @return next node to take the shorter way.
      */
     public static AbstractNetworkElement findeBestWay(AbstractNetworkElement start, String target) {
-	@SuppressWarnings("Convert2Diamond")
-	HashMap<Edge, AbstractNetworkElement> log;
-	log = new HashMap<Edge, AbstractNetworkElement>();
-	AbstractNetworkElement res = null, other, current = start;
-	current.setDistance(0);
-	PriorityQueue queue = new PriorityQueue(new ComparatorDistance());
+        System.err.println("Durée de Dijkstra début : " + new Date(System.currentTimeMillis()).getTime());
+        AbstractNetworkElement res = null, current;
+        @SuppressWarnings("Convert2Diamond")
+        HashMap<Edge, AbstractNetworkElement> log;
+        log = new HashMap<Edge, AbstractNetworkElement>();
+        current = start;
+        current.setDistance(0);
+        PriorityQueue queue = new PriorityQueue(new ComparatorDistance());
         while (res == null) {
-	    for (Edge edge : (List<Edge>) current.getEdge()) {
-		edge.setAttribute((int) current.getDistance());
+            AbstractNetworkElement other;
+            for (Edge edge : (List<Edge>) current.getEdge()) {
+                edge.setAttribute((int) current.getDistance());
                 queue.push(new Element(edge));
-		log.put(edge, current);
-	    }
-            if(queue.size() == 0)
-                return current;
-            
+                log.put(edge, current);
+            }
+            if (queue.size() == 0) {
+                res = current;
+            }
+
             Edge temp = (Edge) queue.pop().getValue();
-	    while ((other = temp.getOther(current)) == null) {
+            while ((other = temp.getOther(current)) == null) {
 
-		current = log.get(temp);
-	    }
+                current = log.get(temp);
+            }
 
-	    if (other.getDistance() > (current.getDistance() + temp.getAttribute().getValue())) {
-		if (other.isActif() == false) {
-		    other.setDistance(temp.getAttribute().getValue() + current.getDistance());
-		    other.previous = current;
-		}
-	    }
-	    current.getEdge().remove(temp);
-	    current = temp.getOther(current);
-	    current.getEdge().remove(temp);
-	    if (current.getName().equals(target)) {
-		res = current;
-	    }
-	}
-	return res;
+            if (other.getDistance() > (current.getDistance() + temp.getAttribute().getValue())) {
+                if (other.isActif() == false) {
+                    other.setDistance(temp.getAttribute().getValue() + current.getDistance());
+                    other.previous = current;
+                }
+            }
+            current.getEdge().remove(temp);
+            current = temp.getOther(current);
+            current.getEdge().remove(temp);
+            if (current.getName().equals(target)) {
+                System.err.println("current " + current.getName());
+                res = current;
+            }
+        }
+
+        Network network = (Network) PandaProdApplication.getApplication().getMap();
+
+        network.createConnectNetwork();
+        System.err.println("Durée de Dijkstra fin : " + new Date(System.currentTimeMillis()).getTime());
+        return res;
     }
 
 }

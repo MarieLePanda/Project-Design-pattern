@@ -12,6 +12,7 @@ import model.network.interfaces.AbstractNetworkElement;
 import interfaces.Plateau;
 import java.awt.Color;
 import java.awt.Label;
+import java.sql.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,11 +28,11 @@ import view.component.PandaProdFrame;
  * @author Lucas
  */
 public class NetworkFrameInitializeur extends AbstractIHMAction {
-    
+
     public NetworkFrameInitializeur(PandaProdFrame csFrame) {
         super(csFrame);
     }
-    
+
     @Override
     public boolean execute(Object... object) {
         System.err.println("Network frame initializeur");
@@ -39,10 +40,10 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
         PandaProdButton boutton = (PandaProdButton) application.getMainFrameJComponent("pandaProdButtonLancer");
         boutton.addActionListener(Dispatcher.getDispatcher());
         boutton.setActionCommand("nextStep");
-        
+
         Network pl = (Network) application.getMap();
         AbstractElement[][] network = pl.getElementMap();
-        
+
         JPanel jpanel = (JPanel) application.getMainFrameJComponent("mapJPanel");
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         JLabel label;
@@ -50,25 +51,25 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
             for (int j = 0; j < network[i].length; j++) {
                 AbstractElement element = network[i][j];
                 label = new JLabel(element.getName());
-                
+
                 JPanel ptest = new JPanel();
-                
+
                 if (element instanceof Server) {
                     ptest.setBackground(Color.red);
                 }
-                
+
                 ptest.setBorder(blackline);
                 ptest.add(element.getName(), label);
                 ptest.setName(element.getName());
                 //System.out.println(ptest.getName());
                 element.setPlace(label);
                 jpanel.add(ptest);
-                
+
             }
         }
-        
+
         application.getMainFrame().refresh();
         return true;
     }
-    
+
 }

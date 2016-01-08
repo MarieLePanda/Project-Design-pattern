@@ -9,7 +9,7 @@ package model.network;
 import java.util.Comparator;
 
 /**
- *
+ *                      
  * @author Mary
  */
 public class ComparatorDistance implements Comparator<Edge>{

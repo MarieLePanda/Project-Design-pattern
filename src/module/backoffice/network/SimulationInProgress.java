@@ -24,12 +24,19 @@ public class SimulationInProgress implements IAction {
         AbstractElement[][] network = (AbstractElement[][]) pl.getElementMap();
 
         for (int i = 0; i < network.length; i++) {
-            for (int j = 1; j < network[i].length; j++) {
+            for (int j = 0; j < network[i].length; j++) {
                 AbstractNetworkElement networkElement = (AbstractNetworkElement) network[i][j];
                 networkElement.processingMessageToSend();
+            }
+        }
+        
+        for (int i = 0; i < network.length; i++) {
+            for (int j = 0; j < network[i].length; j++) {
+                AbstractNetworkElement networkElement = (AbstractNetworkElement) network[i][j];
                 networkElement.processingMessageReceive();
             }
         }
+
         return true;
     }
 }

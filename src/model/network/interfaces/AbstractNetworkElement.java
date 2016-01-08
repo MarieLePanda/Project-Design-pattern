@@ -22,8 +22,8 @@ public abstract class AbstractNetworkElement extends AbstractElement {
     private ArrayList<Edge> edges = new ArrayList<Edge>();
     private boolean actif = false;
 
-    private ArrayList<Message> listMessageReceive = new ArrayList<>();
-    private ArrayList<Message> listMessageToSend = new ArrayList<>();
+    public ArrayList<Message> listMessageReceive = new ArrayList<>();
+    public ArrayList<Message> listMessageToSend = new ArrayList<>();
     public AbstractNetworkElement previous;
 
     public double getDistance() {
@@ -67,7 +67,7 @@ public abstract class AbstractNetworkElement extends AbstractElement {
 
                 } else {
                     place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
-
+                    System.err.println("Je vais renvoyer le message");
                     //place.setBackground(null);
                     //place.setIcon(null);
                     sendMessage(message);
@@ -77,18 +77,17 @@ public abstract class AbstractNetworkElement extends AbstractElement {
     }
 
     public void processingMessageToSend() {
-
+        
         for (Message message : listMessageToSend) {
+            System.err.println("this " + this.getName() + " destinataire : " + message.target.name);
             if (message.isValid()) {
                 AbstractNetworkElement arrive = Dijkstra.findeBestWay(this, message.target.getName());
+                System.err.println("arrivé trouvé " + arrive.getName());
                 while (arrive.previous != this) {
-                    System.out.println("Depart " + arrive.getName());
-
                     arrive = arrive.previous;
-                    System.out.println(this.getName());
                 }
-                System.out.println("Je dois partir en " + arrive.getName());
                 arrive.receiveMessage(message);
+                System.err.println("j'envoie à " + arrive.getName());
             }
         }
         listMessageToSend.clear();

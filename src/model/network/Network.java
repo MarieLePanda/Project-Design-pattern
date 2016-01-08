@@ -58,13 +58,17 @@ public class Network extends Plateau {
                     if (j == 0) {
                         new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
                         new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
+                        //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
 
                     } else {
                         if (j < elementMap[i].length - 1) {
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                            //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
                         }
                         new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
                         new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
+                        //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
 
                     }
                 } else {
@@ -72,28 +76,40 @@ public class Network extends Plateau {
                         if (j == 0) {
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                            //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
                         } else {
                             if (j < elementMap[i].length - 1) {
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
+                                //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
                             }
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                            //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
                         }
                     } else {
+
                         if (j == 0) {
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
                             new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                            //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
                         } else {
                             if (j == elementMap[i].length - 1) {
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                                //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
                             } else {
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j - 1], new Distance(1));
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i + 1][j], new Distance(1));
                                 new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i - 1][j], new Distance(1));
+                                //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
                             }
                         }
                     }
