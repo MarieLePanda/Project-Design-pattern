@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package model.network.virus;
 
-import java.util.ArrayList;
+import model.network.interfaces.Open;
 
 /**
  *
  * @author Lucas
  */
-public abstract class AbstractNetworkElement extends AbstractElement {
+public class OpenVirus extends Open {
 
-    public abstract void receiveMessage(String message, String nomTarget);
+    @Override
+    public String open() {
+        return "Oups, vous n'auriez pas du !";
+    }
+    
 }

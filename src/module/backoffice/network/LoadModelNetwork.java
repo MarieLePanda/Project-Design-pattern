@@ -3,15 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package module.backoffice;
+package module.backoffice.network;
 
 import interfaces.action.IAction;
-import interfaces.AbstractNetworkElement;
-import java.awt.Label;
-import javax.swing.JPanel;
-import model.network.Link;
 import model.network.Network;
-import model.network.Server;
 import panda.prod.application.PandaProdApplication;
 
 /**
