@@ -6,6 +6,7 @@
 package controller;
 
 import interfaces.AbstractElement;
+import interfaces.Plateau;
 import panda.prod.application.PandaProdApplication;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,22 +14,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
+
 import module.backoffice.LoadModelCastle;
-import module.backoffice.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
 import module.ihm.CastlefightFrameInitializeur;
-=======
+
 import model.network.Network;
 import model.network.Server;
 import model.network.interfaces.AbstractNetworkElement;
 import model.network.interfaces.Message;
 import model.network.mail.Mail;
+import model.network.utils.dijkstra.Dijkstra;
 import module.backoffice.network.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
 import module.backoffice.network.LaunchSimulation;
 import module.backoffice.network.SimulationInProgress;
->>>>>>> refs/remotes/origin/master
+
 import module.ihm.FourmisFrameInitializeur;
 import module.ihm.network.NetworkFrameInitializeur;
 import view.MapPPFrame;
@@ -66,7 +67,9 @@ public class Dispatcher implements ActionListener {
             Logger.getLogger(Dispatcher.class.getName()).log(Level.SEVERE, "Unknown action: " + actionName, ex);
         }
     }
-
+    /**
+     * SIMULATION NETWORK - MAIN
+     */
     public void simulationNetworkAction() {
         System.err.println("simulation network");
         new LoadModelNetwork().execute();
@@ -75,7 +78,9 @@ public class Dispatcher implements ActionListener {
         new LaunchSimulation().execute();
 
     }
-
+    /**
+     * ANNEXE - SIMULATION NETWORK
+     */
     public void nextStepAction() {
         System.err.println("Next step");
         Network pl = (Network) application.getMap();
@@ -108,17 +113,29 @@ public class Dispatcher implements ActionListener {
         new SimulationInProgress().execute();
 
     }
-
+    /**
+     * SIMULATION FOURMILIERE - MAIN
+     */
     public void simulationFourmisAction() {
         System.err.println("simulation fourmis");
         new LoadModelFourmis().execute();
         application.setMainFrame(new MapPPFrame(10, 10));
         new FourmisFrameInitializeur(application.getMainFrame()).execute();
     }
+     /**
+     * SIMULATION TOWER DEFENSE - MAIN
+     */
     public void simulationCastlefightAction() {
            System.err.println("TOWER DEFENSE");
            new LoadModelCastle().execute();
            application.setMainFrame(new MapPPFrame(10, 10));
+           Plateau pl = application.getMap();
+           AbstractElement case_depart = pl.getElementMap()[0][0];
+           AbstractElement case_end = pl.getElementMap()[9][9];
+           AbstractElement pointeur = Dijkstra.findeBestWay(case_depart, case_end.getName());
+           
+           System.out.println(" Départ : "+case_depart.getName()+" Arrivée : "+case_end.getName());
+           System.out.println(" Case d'après : "+ pointeur.previous.getName());
            new CastlefightFrameInitializeur(application.getMainFrame()).execute();
        }
 }

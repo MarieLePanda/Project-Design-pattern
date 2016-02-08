@@ -17,6 +17,8 @@ import model.towerdefense.interfaces.PersonnageInterface;
 public class Chevalier extends PersonnageAbstractElement{
     
     public Chevalier(){
+        // Défini le nom de la case
+        name = "CHEVALIER";
         System.out.println("Un Chevalier créé.");
         setDeplacementStrategy(new AvanceACheval());
     }

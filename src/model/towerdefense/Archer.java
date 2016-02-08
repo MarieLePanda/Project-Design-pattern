@@ -16,6 +16,7 @@ import model.towerdefense.interfaces.PersonnageInterface;
 public class Archer extends PersonnageAbstractElement{
        
     public Archer(){
+       name = "Archer";
        System.out.println("Un Archer créé.");
        setDeplacementStrategy(new MarcherAPied());
         

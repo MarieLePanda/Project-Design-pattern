@@ -15,6 +15,7 @@ public class Case extends AbstractElement{
     
     private int positionX;
     private int positionY;
+   
     
     public Case(int x,int y){
         this.positionX = x;

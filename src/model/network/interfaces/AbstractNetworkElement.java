@@ -20,33 +20,8 @@ import model.network.utils.dijkstra.Edge;
  */
 public abstract class AbstractNetworkElement extends AbstractElement {
 
-    private double distance = Double.POSITIVE_INFINITY;
-    private ArrayList<Edge> edges = new ArrayList<Edge>();
-    private boolean actif = false;
-
     public ArrayList<Message> listMessageReceive = new ArrayList<>();
     public ArrayList<Message> listMessageToSend = new ArrayList<>();
-    public AbstractNetworkElement previous;
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        if (this.distance == Double.POSITIVE_INFINITY) {
-            this.distance = 0;
-        }
-        this.distance += distance;
-    }
-
-    public void setEdges(List<Edge> edges) {
-        //this.edges = edges;
-        this.edges.clear();
-    }
-
-    public ArrayList<Edge> getEdge() {
-        return edges;
-    }
 
     public void receiveMessage(Message message) {
         listMessageReceive.add(message);
@@ -89,7 +64,7 @@ public abstract class AbstractNetworkElement extends AbstractElement {
 //            Message message = listMessageToSend.get(0);
 //            System.err.println("this " + this.getName() + " destinataire : " + message.target.name);
             if (message.isValid()) {
-                AbstractNetworkElement arrive = Dijkstra.findeBestWay(this, message.target.getName());
+                AbstractElement arrive =  Dijkstra.findeBestWay(this, message.target.getName());
 //                System.err.println("arrivé trouvé " + arrive.getName());
                 System.err.println("this trouvé " + this.getName());
                 System.err.println("Destination message " + message.target.getName());
@@ -99,7 +74,7 @@ public abstract class AbstractNetworkElement extends AbstractElement {
                     arrive = arrive.previous;
                     System.err.println("previous " + arrive.getName());
                 }
-                arrive.receiveMessage(message);
+                ((AbstractNetworkElement)arrive).receiveMessage(message);
                 System.err.println("j'envoie à " + arrive.getName());
             }
 //            listMessageToSend.remove(0);
@@ -107,13 +82,7 @@ public abstract class AbstractNetworkElement extends AbstractElement {
         listMessageToSend.clear();
     }
 
-    public boolean isActif() {
-        return actif;
-    }
-
-    public void setActif(boolean actif) {
-        this.actif = actif;
-    }
+    
 
     private Color chooseColor() {
 //        System.err.println("taille " + listMessageReceive.size());

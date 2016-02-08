@@ -16,6 +16,7 @@ import model.towerdefense.Strategy.MarcherAPied;
 public class Soldat extends PersonnageAbstractElement{
     
     public Soldat(){
+        name = "SOLDAT";
         System.out.println("Un Soldat créé.");
         setDeplacementStrategy(new MarcherAPied());
     }

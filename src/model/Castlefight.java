@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.network.utils.dijkstra.Distance;
+import model.network.utils.dijkstra.Edge;
 import model.towerdefense.Case;
 import model.towerdefense.ParcelleDeTerrain;
 import model.towerdefense.SpecialCase;
@@ -67,11 +69,13 @@ public class Castlefight extends Plateau{
                     if((l != 0 && c != line.length()-1) || (l !=  line.length()-1 && c != 0)){
                         // Départ ou arrivée
                         elementMap[l][c] = new ParcelleDeTerrain(l,c);
+                        
                     }else{
                         elementMap[l][c] = new SpecialCase(l,c);
                     }
                     
                     for(int z = 0; z <listRandomCol.length;z++){
+                            
                         if(l == listRandomCol[z] && c == listRandomRow[z]){
                             // C'est un emplacement Tourelle
                             elementMap[l][c] = new TowerElement(l,c);
@@ -81,6 +85,71 @@ public class Castlefight extends Plateau{
                 l++;
             }
             file.close();
+            
+            for(int z =0; z < elementMap.length; z++){
+                for(int c=0;c < elementMap[z].length;c++){
+                    if (z == 0) {
+                               if (c == 0) {
+                                   new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c + 1], new Distance(1));
+                                   new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z + 1][c], new Distance(1));
+                                   //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                               } else {
+                                   if (c < elementMap[z].length - 1) {
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c + 1], new Distance(1));
+                                       //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                                   }
+                                   new Edge((AbstractElement) elementMap[c][c], (AbstractElement) elementMap[z + 1][c], new Distance(1));
+                                   new Edge((AbstractElement) elementMap[c][c], (AbstractElement) elementMap[z][c - 1], new Distance(1));
+                                   //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                               }
+                           } else {
+                               if (z == elementMap.length - 1) {
+                                   if (c == 0) {
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c + 1], new Distance(1));
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z - 1][c], new Distance(1));
+                                       //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                                   } else {
+                                       if (c < elementMap[z].length - 1) {
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c + 1], new Distance(1));
+                                           //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                                       }
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c - 1], new Distance(1));
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z - 1][c], new Distance(1));
+                                       //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                                   }
+                               } else {
+
+                                   if (c == 0) {
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c + 1], new Distance(1));
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z + 1][c], new Distance(1));
+                                       new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z - 1][c], new Distance(1));
+                                       //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                                   } else {
+                                       if (c == elementMap[z].length - 1) {
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c - 1], new Distance(1));
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z + 1][c], new Distance(1));
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z - 1][c], new Distance(1));
+                                           //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+                                       } else {
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c + 1], new Distance(1));
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z][c - 1], new Distance(1));
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z + 1][c], new Distance(1));
+                                           new Edge((AbstractElement) elementMap[z][c], (AbstractElement) elementMap[z - 1][c], new Distance(1));
+                                           //System.err.println("createConnectNetwork : " + elementMap[i][j].getName());
+
+                                       }
+                                   }
+                               }
+                           }
+                }
+            }
         } catch (IOException e) {
             Logger.getLogger("FileIO").log(Level.SEVERE, "Erreur lors de la lecture du fichier de map serveur", e);
         }

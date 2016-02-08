@@ -6,13 +6,14 @@
 package model;
 
 import interfaces.AbstractElement;
-import interfaces.AbstractNetworkElement;
 import interfaces.Plateau;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.network.Link;
+import model.network.Server;
 import panda.prod.application.SystemSettings;
 
 /**

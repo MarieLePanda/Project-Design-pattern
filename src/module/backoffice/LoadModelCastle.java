@@ -7,7 +7,6 @@ package module.backoffice;
 
 import interfaces.action.IAction;
 import model.Castlefight;
-import model.Fourmiliere;
 import panda.prod.application.PandaProdApplication;
 
 /**

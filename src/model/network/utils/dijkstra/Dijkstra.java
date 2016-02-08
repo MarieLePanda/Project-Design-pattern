@@ -5,6 +5,7 @@
  */
 package model.network.utils.dijkstra;
 
+import interfaces.AbstractElement;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,17 +26,17 @@ public class Dijkstra {
      * @param start Start node
      * @return next node to take the shorter way.
      */
-    public static AbstractNetworkElement findeBestWay(AbstractNetworkElement start, String target) {
+    public static AbstractElement findeBestWay(AbstractElement start, String target) {
 //        System.err.println("Durée de Dijkstra début : " + new Date(System.currentTimeMillis()).getTime());
-        AbstractNetworkElement res = null, current;
+        AbstractElement res = null, current;
         @SuppressWarnings("Convert2Diamond")
-        HashMap<Edge, AbstractNetworkElement> log;
-        log = new HashMap<Edge, AbstractNetworkElement>();
+        HashMap<Edge, AbstractElement> log;
+        log = new HashMap<Edge, AbstractElement>();
         current = start;
         current.setDistance(0);
         PriorityQueue queue = new PriorityQueue(new ComparatorDistance());
         while (res == null) {
-            AbstractNetworkElement other;
+            AbstractElement other;
             for (Edge edge : (List<Edge>) current.getEdge()) {
                 edge.setAttribute((int) current.getDistance());
                 queue.push(new Element(edge));
@@ -44,10 +45,8 @@ public class Dijkstra {
             if (queue.size() == 0) {
                 res = current;
             }
-
             Edge temp = (Edge) queue.pop().getValue();
             while ((other = temp.getOther(current)) == null) {
-
                 current = log.get(temp);
             }
             

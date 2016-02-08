@@ -13,6 +13,8 @@ public class ParcelleDeTerrain extends Case{
     
     public ParcelleDeTerrain(int x, int y) {
         super(x, y);
+        // Défini le nom de la case
+        name = "PT"+x+y;
         System.out.println("Je suis une partie de terrain.");
     }
     

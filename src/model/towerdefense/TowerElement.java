@@ -18,6 +18,8 @@ public class TowerElement extends Case{
 
     public TowerElement(int x, int y) {
         super(x, y);
+        // Défini le nom de la case
+        name = "TOURELLE{"+x+y+"}";
     }
      
     public int getPointAttaque() {

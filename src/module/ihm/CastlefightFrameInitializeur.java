@@ -16,7 +16,8 @@ import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import model.Terrain;
+import model.network.utils.dijkstra.Distance;
+import model.network.utils.dijkstra.Edge;
 import model.towerdefense.Case;
 import model.towerdefense.Chevalier;
 import model.towerdefense.Link;
@@ -52,13 +53,7 @@ public class CastlefightFrameInitializeur extends AbstractIHMAction {
         Border border = BorderFactory.createLineBorder(Color.black, 1);
         Label label;
         
-        
-        Soldat soldat = new Soldat();
-        soldat.avance();
-        
-        Chevalier chevalier = new Chevalier();
-        chevalier.avance();
-        
+ 
         int[] listRandomCol= {0,0,0},listRandomRow = {0,0,0};
         Random rand = new Random();
         for(int i=0;i<3;i++){
@@ -71,11 +66,12 @@ public class CastlefightFrameInitializeur extends AbstractIHMAction {
         for (int i = 0; i < grille.length; i++) {  
             for (int j = 0; j < grille[i].length; j++) {
                 AbstractElement element = grille[i][j];
+                
                 //System.out.println(element);
                 label = new Label();
                 JPanel ptest = new JPanel();
                if(element instanceof SpecialCase){
-                    System.out.println("CECI EST UNE CASE : SPECIALE !");
+                    //System.out.println("CECI EST UNE CASE : SPECIALE !");
                     element = (SpecialCase)grille[i][j];
                     if(i == 0){
                         element.setName("S");
@@ -86,14 +82,14 @@ public class CastlefightFrameInitializeur extends AbstractIHMAction {
                     ptest.setBackground(Color.WHITE);
                     ptest.setBorder(border);
                 }else if(element instanceof ParcelleDeTerrain){
-                    System.out.println("CECI EST UNE CASE : PARCELLE DE TERRAIN !");
+                    //System.out.println("CECI EST UNE CASE : PARCELLE DE TERRAIN !");
                     element = (ParcelleDeTerrain)grille[i][j];
                     element.setName("P");
                     label.setText(element.getName());
                     ptest.setBackground(Color.LIGHT_GRAY);
                     ptest.setBorder(border);
                 }else if(element instanceof TowerElement){
-                    System.out.println("CECI EST UNE CASE : TOURELLE !");
+                    //System.out.println("CECI EST UNE CASE : TOURELLE !");
                     element = (TowerElement)grille[i][j];
                     element.setName("T");
                     label.setText(element.getName());

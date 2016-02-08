@@ -5,8 +5,8 @@
  */
 package model.network.utils.dijkstra;
 
+import interfaces.AbstractElement;
 import java.util.ArrayList;
-import model.network.interfaces.AbstractNetworkElement;
 
 /**
  *
@@ -14,11 +14,11 @@ import model.network.interfaces.AbstractNetworkElement;
  */
 public class Edge {
 
-    private AbstractNetworkElement elementOne, elementTwo;
+    private AbstractElement elementOne, elementTwo;
     private Distance value;
     private ArrayList<Edge> pile = new ArrayList<Edge>();
 
-    public Edge(AbstractNetworkElement elementOne, AbstractNetworkElement elementTwo, Distance value) {
+    public Edge(AbstractElement elementOne, AbstractElement elementTwo, Distance value) {
         // TODO Auto-generated constructor stub
         this.elementOne = elementOne;
         this.elementTwo = elementTwo;
@@ -37,7 +37,7 @@ public class Edge {
         return value;
     }
 
-    public AbstractNetworkElement getOther(AbstractNetworkElement node) {
+    public AbstractElement getOther(AbstractElement node) {
         // TODO Auto-generated method stub
         if (node == elementOne) {
             return elementTwo;
