@@ -75,7 +75,7 @@ public class Dispatcher implements ActionListener {
         if (pl.getListOfMessage().size() < 4) {
             Message message;
             AbstractNetworkElement networkElementEnd;
-            if (pl.getListOfMessage().size() < 1) {
+//            if (pl.getListOfMessage().size() < 1) {
                 AbstractNetworkElement networkElementStart = pl.getListOfServers().get(0);
                 networkElementEnd = pl.getListOfServers().get(4);
                 message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
@@ -84,19 +84,18 @@ public class Dispatcher implements ActionListener {
 
                 networkElementStart.sendMessage(message);
 
-            } else {
-                AbstractNetworkElement networkElementStart = pl.getListOfServers().get(1);
+//            } else {
+//                AbstractNetworkElement networkElementStart = pl.getListOfServers().get(1);
 //            if (pl.getListOfMessage().size() % 2 == 0) {
 //                networkElementEnd = pl.getListOfServers().get(6);
 //            } else {
-                networkElementEnd = pl.getListOfServers().get(9);
+//                networkElementEnd = pl.getListOfServers().get(9);
 //            }
-                message = new Mail((Server) networkElementStart, "Hello panda 1", (Server) networkElementEnd);
-                System.err.println("Message 2 envoyé à " + networkElementEnd.getName());
-                pl.getListOfMessage().add(message);
-
-                networkElementStart.sendMessage(message);
-            }
+//                message = new Mail((Server) networkElementStart, "Hello panda 1", (Server) networkElementEnd);
+//                System.err.println("Message 2 envoyé à " + networkElementEnd.getName());
+//                pl.getListOfMessage().add(message);
+//                networkElementStart.sendMessage(message);
+//            }
 
         }
         new SimulationInProgress().execute();
