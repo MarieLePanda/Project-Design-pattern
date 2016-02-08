@@ -60,3 +60,4 @@ $RECYCLE.BIN/
 /build/
 /dist/
 /nbproject/private/
+nbproject/build-native.xml
