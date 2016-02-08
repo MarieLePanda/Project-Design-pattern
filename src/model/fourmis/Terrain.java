@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package model.fourmis;
 
-import java.util.ArrayList;
+import interfaces.AbstractElement;
 
 /**
  *
  * @author Lucas
  */
-public abstract class AbstractNetworkElement extends AbstractElement{
+public class Terrain extends AbstractElement{
     
-   
+    public Terrain(String n){
+        this.name=n;
+    }
 }

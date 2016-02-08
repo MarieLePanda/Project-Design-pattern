@@ -13,7 +13,7 @@ import java.awt.Label;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import model.Terrain;
+import model.fourmis.Terrain;
 import panda.prod.application.PandaProdApplication;
 import view.component.PandaProdFrame;
 

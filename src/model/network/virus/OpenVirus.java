@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.network.virus;
 
-import interfaces.AbstractElement;
+import model.network.interfaces.Open;
 
 /**
  *
  * @author Lucas
  */
-public class Tunnel extends AbstractElement {
-    
-    public Tunnel(String n){
-        this.name=n;
+public class OpenVirus extends Open {
+
+    @Override
+    public String open() {
+        return "Oups, vous n'auriez pas du !";
     }
+    
 }

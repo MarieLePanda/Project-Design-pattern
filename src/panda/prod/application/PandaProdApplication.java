@@ -5,7 +5,7 @@ import interfaces.Plateau;
 import java.util.HashMap;
 
 import javax.swing.UnsupportedLookAndFeelException;
-import model.Network;
+import model.network.Network;
 import module.ihm.MainFrameInitializeur;
 
 import view.MainPPFrame;
@@ -101,7 +101,7 @@ public class PandaProdApplication {
     public static PandaProdApplication getApplication() {
         if(application == null) {
             application = new PandaProdApplication();
-        }
+        }   
         return application;
     }
     

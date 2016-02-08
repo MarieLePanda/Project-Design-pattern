@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package module.ihm;
+package module.ihm.network;
 
+import controller.Dispatcher;
 import interfaces.AbstractElement;
 import interfaces.action.AbstractIHMAction;
-import interfaces.AbstractNetworkElement;
-import interfaces.Plateau;
 import java.awt.Color;
-import java.awt.Label;
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import model.Server;
+import model.network.Network;
+import model.network.Server;
 import panda.prod.application.PandaProdApplication;
+import view.component.PandaProdButton;
 import view.component.PandaProdFrame;
 
 /**
@@ -32,23 +33,34 @@ public class NetworkFrameInitializeur extends AbstractIHMAction {
     public boolean execute(Object... object) {
         System.err.println("Network frame initializeur");
         PandaProdApplication application = PandaProdApplication.getApplication();
-        Plateau pl = application.getMap();
+        PandaProdButton boutton = (PandaProdButton) application.getMainFrameJComponent("pandaProdButtonLancer");
+        boutton.addActionListener(Dispatcher.getDispatcher());
+        boutton.setActionCommand("nextStep");
+
+        Network pl = (Network) application.getMap();
         AbstractElement[][] network = pl.getElementMap();
-       
+
         JPanel jpanel = (JPanel) application.getMainFrameJComponent("mapJPanel");
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
-        Label label;
+        JLabel label;
         for (int i = 0; i < network.length; i++) {
             for (int j = 0; j < network[i].length; j++) {
                 AbstractElement element = network[i][j];
-                label = new Label(element.getName());
+                label = new JLabel(element.getName());
+
                 JPanel ptest = new JPanel();
+
                 if (element instanceof Server) {
                     ptest.setBackground(Color.red);
                 }
+
                 ptest.setBorder(blackline);
-                ptest.add(label);
+                ptest.add(element.getName(), label);
+                ptest.setName(element.getName());
+                //System.out.println(ptest.getName());
+                element.setPlace(label);
                 jpanel.add(ptest);
+
             }
         }
 

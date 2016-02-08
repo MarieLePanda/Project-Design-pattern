@@ -5,6 +5,7 @@
  */
 package controller;
 
+import interfaces.AbstractElement;
 import panda.prod.application.PandaProdApplication;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,13 +13,26 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 import module.backoffice.LoadModelCastle;
 import module.backoffice.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
 import module.ihm.CastlefightFrameInitializeur;
+=======
+import model.network.Network;
+import model.network.Server;
+import model.network.interfaces.AbstractNetworkElement;
+import model.network.interfaces.Message;
+import model.network.mail.Mail;
+import module.backoffice.network.LoadModelNetwork;
+import module.backoffice.LoadModelFourmis;
+import module.backoffice.network.LaunchSimulation;
+import module.backoffice.network.SimulationInProgress;
+>>>>>>> refs/remotes/origin/master
 import module.ihm.FourmisFrameInitializeur;
-import module.ihm.NetworkFrameInitializeur;
+import module.ihm.network.NetworkFrameInitializeur;
 import view.MapPPFrame;
+import view.MapPPFrame2;
 
 public class Dispatcher implements ActionListener {
 
@@ -58,6 +72,41 @@ public class Dispatcher implements ActionListener {
         new LoadModelNetwork().execute();
         application.setMainFrame(new MapPPFrame(10, 10));
         new NetworkFrameInitializeur(application.getMainFrame()).execute();
+        new LaunchSimulation().execute();
+
+    }
+
+    public void nextStepAction() {
+        System.err.println("Next step");
+        Network pl = (Network) application.getMap();
+        if (pl.getListOfMessage().size() < 4) {
+            Message message;
+            AbstractNetworkElement networkElementEnd;
+//            if (pl.getListOfMessage().size() < 1) {
+                AbstractNetworkElement networkElementStart = pl.getListOfServers().get(0);
+                networkElementEnd = pl.getListOfServers().get(4);
+                message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
+                System.err.println("Message 1 envoyé à " + networkElementEnd.getName());
+                pl.getListOfMessage().add(message);
+
+                networkElementStart.sendMessage(message);
+
+//            } else {
+//                AbstractNetworkElement networkElementStart = pl.getListOfServers().get(1);
+//            if (pl.getListOfMessage().size() % 2 == 0) {
+//                networkElementEnd = pl.getListOfServers().get(6);
+//            } else {
+//                networkElementEnd = pl.getListOfServers().get(9);
+//            }
+//                message = new Mail((Server) networkElementStart, "Hello panda 1", (Server) networkElementEnd);
+//                System.err.println("Message 2 envoyé à " + networkElementEnd.getName());
+//                pl.getListOfMessage().add(message);
+//                networkElementStart.sendMessage(message);
+//            }
+
+        }
+        new SimulationInProgress().execute();
+
     }
 
     public void simulationFourmisAction() {

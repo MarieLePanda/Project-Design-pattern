@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.network;
 
-import interfaces.AbstractElement;
-import interfaces.AbstractNetworkElement;
+import model.network.interfaces.AbstractNetworkElement;
 
 /**
  *
  * @author Lucas
  */
-public class Server extends AbstractElement{
-    
-    
-    public Server(String name){
+public class Server extends AbstractNetworkElement {
+
+    private String message;
+
+    public Server(String name) {
         this.name = name;
     }
 }
