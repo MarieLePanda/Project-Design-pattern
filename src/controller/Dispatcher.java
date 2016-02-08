@@ -74,20 +74,30 @@ public class Dispatcher implements ActionListener {
         Network pl = (Network) application.getMap();
         if (pl.getListOfMessage().size() < 4) {
             Message message;
-            if (pl.getListOfMessage().size() == 2) {
+            AbstractNetworkElement networkElementEnd;
+            if (pl.getListOfMessage().size() < 1) {
                 AbstractNetworkElement networkElementStart = pl.getListOfServers().get(0);
-                AbstractNetworkElement networkElementEnd = pl.getListOfServers().get(4);
+                networkElementEnd = pl.getListOfServers().get(4);
                 message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
+                System.err.println("Message 1 envoyé à " + networkElementEnd.getName());
+                pl.getListOfMessage().add(message);
+
                 networkElementStart.sendMessage(message);
 
             } else {
                 AbstractNetworkElement networkElementStart = pl.getListOfServers().get(1);
-                AbstractNetworkElement networkElementEnd = pl.getListOfServers().get(6);
-                message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
+//            if (pl.getListOfMessage().size() % 2 == 0) {
+//                networkElementEnd = pl.getListOfServers().get(6);
+//            } else {
+                networkElementEnd = pl.getListOfServers().get(9);
+//            }
+                message = new Mail((Server) networkElementStart, "Hello panda 1", (Server) networkElementEnd);
+                System.err.println("Message 2 envoyé à " + networkElementEnd.getName());
+                pl.getListOfMessage().add(message);
+
                 networkElementStart.sendMessage(message);
             }
 
-            pl.getListOfMessage().add(message);
         }
         new SimulationInProgress().execute();
 

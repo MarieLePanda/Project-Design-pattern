@@ -27,14 +27,14 @@ public class LaunchSimulation implements IAction {
     public boolean execute(Object... object) {
         PandaProdApplication application = PandaProdApplication.getApplication();
         Network pl = (Network) application.getMap();
-        if (pl.getListOfMessage().size() < 3) {
-            Message message;
-            AbstractNetworkElement networkElementStart = pl.getListOfServers().get(1);
-            AbstractNetworkElement networkElementEnd = pl.getListOfServers().get(6);
-            message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
-            networkElementStart.sendMessage(message);
-            pl.getListOfMessage().add(message);
-        }
+//        if (pl.getListOfMessage().size() < 3) {
+//            Message message;
+//            AbstractNetworkElement networkElementStart = pl.getListOfServers().get(1);
+//            AbstractNetworkElement networkElementEnd = pl.getListOfServers().get(6);
+//            message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
+//            networkElementStart.sendMessage(message);
+//            pl.getListOfMessage().add(message);
+//        }
         
 //        Network pl = (Network) application.getMap();
 //        AbstractElement[][] network = (AbstractElement[][]) pl.getElementMap();

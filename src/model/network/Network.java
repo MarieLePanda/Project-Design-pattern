@@ -78,7 +78,7 @@ public class Network extends Plateau {
         System.err.println("create connect");
         for (int i = 0; i < elementMap.length; i++) {
             for (int j = 0; j < elementMap[i].length; j++) {
-//                ((AbstractNetworkElement) elementMap[i][j]).setDistance(Double.MAX_VALUE);
+//                ((AbstractNetworkElement) elementMap[i][j]).previous = null;
                 if (i == 0) {
                     if (j == 0) {
                         new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));

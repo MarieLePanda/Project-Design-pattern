@@ -18,6 +18,7 @@ import panda.prod.application.PandaProdApplication;
  */
 public class Dijkstra {
 
+    private static int i = 0;
     /**
      * Enable find the shorter way at T instant
      *
@@ -50,11 +51,9 @@ public class Dijkstra {
                 current = log.get(temp);
             }
             
-            System.err.println("Other Distance : " + other.getName() + " " + other.getDistance() + " Current Distance : " + current.getName() + " " + (current.getDistance() + temp.getAttribute().getValue()));
             if (other.getDistance() > (current.getDistance() + temp.getAttribute().getValue())) {
-                System.err.println("Panda passe");
                 if (other.isActif() == false) {
-                    System.err.println("Panda passe2 other : " + other.getName() + " current : " + current.getName());
+                    System.err.println("i : " + i);
                     other.setDistance(temp.getAttribute().getValue() + current.getDistance());
                     other.previous = current;
                 }
@@ -66,7 +65,7 @@ public class Dijkstra {
             current.getEdge().remove(temp);
             current = temp.getOther(current);
             current.getEdge().remove(temp);
-
+            System.err.println("current : " + current.getName());
             if (current.getName().equals(target)) {
 //                System.err.println("current " + current.getName());
                 res = current;
@@ -76,6 +75,7 @@ public class Dijkstra {
         Network network = (Network) PandaProdApplication.getApplication().getMap();
 
         network.createConnectNetwork();
+        i++;
 //        System.err.println("Durée de Dijkstra fin : " + new Date(System.currentTimeMillis()).getTime());
         return res;
     }

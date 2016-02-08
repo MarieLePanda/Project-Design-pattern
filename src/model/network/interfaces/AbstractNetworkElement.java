@@ -72,7 +72,7 @@ public abstract class AbstractNetworkElement extends AbstractElement {
                         JPanel jp = (JPanel) place.getParent();
                         jp.setBackground(chooseColor());
                         System.err.println("Je vais renvoyer le message");
-                        
+
                         sendMessage(message);
                     }
                 }
@@ -84,25 +84,27 @@ public abstract class AbstractNetworkElement extends AbstractElement {
     public void processingMessageToSend() {
         JPanel jp = (JPanel) place.getParent();
         jp.setBackground(chooseColor());
-//        for (Message message : listMessageToSend) {
-        if (!listMessageToSend.isEmpty()) {
-            Message message = listMessageToSend.get(0);
+        for (Message message : listMessageToSend) {
+//        if (!listMessageToSend.isEmpty()) {
+//            Message message = listMessageToSend.get(0);
 //            System.err.println("this " + this.getName() + " destinataire : " + message.target.name);
             if (message.isValid()) {
                 AbstractNetworkElement arrive = Dijkstra.findeBestWay(this, message.target.getName());
 //                System.err.println("arrivé trouvé " + arrive.getName());
-//                System.err.println("this trouvé " + this.getName());
-//                System.err.println("arrive " + arrive.getName());
-//                System.err.println("null ? " + arrive.previous);
+                System.err.println("this trouvé " + this.getName());
+                System.err.println("Destination message " + message.target.getName());
+                System.err.println("arrive " + arrive.getName());
+                System.err.println("null ? " + arrive.previous);
                 while (arrive.previous != this) {
                     arrive = arrive.previous;
-//                    System.err.println("previous " + arrive.getName());
+                    System.err.println("previous " + arrive.getName());
                 }
                 arrive.receiveMessage(message);
                 System.err.println("j'envoie à " + arrive.getName());
             }
-            listMessageToSend.remove(0);
+//            listMessageToSend.remove(0);
         }
+        listMessageToSend.clear();
     }
 
     public boolean isActif() {
