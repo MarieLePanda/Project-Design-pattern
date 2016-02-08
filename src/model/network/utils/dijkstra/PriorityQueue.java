@@ -1,4 +1,4 @@
-package model.network;
+package model.network.utils.dijkstra;
 
 import java.util.ArrayList;
 import model.network.interfaces.AbstractNetworkElement;

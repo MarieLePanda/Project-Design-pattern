@@ -6,11 +6,13 @@
 package model.network.interfaces;
 
 import interfaces.AbstractElement;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
-import model.network.Dijkstra;
-import model.network.Edge;
+import javax.swing.JPanel;
+import model.network.utils.dijkstra.Dijkstra;
+import model.network.utils.dijkstra.Edge;
 
 /**
  *
@@ -63,13 +65,14 @@ public abstract class AbstractNetworkElement extends AbstractElement {
                     if (message.getTarget().getName().equals(name)) {
                         System.err.println(message.contenue);
                         System.out.println("HEY ! I AM " + name + " I HAVE A MESSAGE !!!! " + message.open());
-                        place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
+                        JPanel jp = (JPanel) place.getParent();
+                        jp.setBackground(Color.cyan);
 
                     } else {
-                        place.setIcon(new ImageIcon("resources\\reseau\\mail.png"));
+                        JPanel jp = (JPanel) place.getParent();
+                        jp.setBackground(chooseColor());
                         System.err.println("Je vais renvoyer le message");
-                        //place.setBackground(null);
-                        //place.setIcon(null);
+                        
                         sendMessage(message);
                     }
                 }
@@ -79,21 +82,27 @@ public abstract class AbstractNetworkElement extends AbstractElement {
     }
 
     public void processingMessageToSend() {
-
-        for (Message message : listMessageToSend) {
-            System.err.println("this " + this.getName() + " destinataire : " + message.target.name);
+        JPanel jp = (JPanel) place.getParent();
+        jp.setBackground(chooseColor());
+//        for (Message message : listMessageToSend) {
+        if (!listMessageToSend.isEmpty()) {
+            Message message = listMessageToSend.get(0);
+//            System.err.println("this " + this.getName() + " destinataire : " + message.target.name);
             if (message.isValid()) {
                 AbstractNetworkElement arrive = Dijkstra.findeBestWay(this, message.target.getName());
-                System.err.println("arrivé trouvé " + arrive.getName());
+//                System.err.println("arrivé trouvé " + arrive.getName());
+//                System.err.println("this trouvé " + this.getName());
+//                System.err.println("arrive " + arrive.getName());
+//                System.err.println("null ? " + arrive.previous);
                 while (arrive.previous != this) {
                     arrive = arrive.previous;
+//                    System.err.println("previous " + arrive.getName());
                 }
                 arrive.receiveMessage(message);
                 System.err.println("j'envoie à " + arrive.getName());
             }
+            listMessageToSend.remove(0);
         }
-        listMessageToSend.clear();
-        place.setIcon(null);
     }
 
     public boolean isActif() {
@@ -102,5 +111,20 @@ public abstract class AbstractNetworkElement extends AbstractElement {
 
     public void setActif(boolean actif) {
         this.actif = actif;
+    }
+
+    private Color chooseColor() {
+//        System.err.println("taille " + listMessageReceive.size());
+        if (listMessageReceive.size() > 10) {
+            return Color.red;
+        }
+        if (listMessageReceive.size() > 2) {
+            return Color.orange;
+        }
+        if (listMessageReceive.size() > 0) {
+            return Color.green;
+        }
+
+        return null;
     }
 }

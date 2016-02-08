@@ -5,14 +5,18 @@
  */
 package model.network;
 
+import model.network.utils.dijkstra.Edge;
+import model.network.utils.dijkstra.Distance;
 import interfaces.AbstractElement;
 import interfaces.Plateau;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.network.interfaces.AbstractNetworkElement;
+import model.network.interfaces.Message;
 import panda.prod.application.SystemSettings;
 
 /**
@@ -21,6 +25,25 @@ import panda.prod.application.SystemSettings;
  */
 public class Network extends Plateau {
 
+    private ArrayList<AbstractNetworkElement> listOfServers = new ArrayList<AbstractNetworkElement>();
+    private ArrayList<Message> listOfMessage = new ArrayList<Message>();
+
+    public ArrayList<Message> getListOfMessage() {
+        return listOfMessage;
+    }
+
+    public void setListOfMessage(ArrayList<Message> listOfMessage) {
+        this.listOfMessage = listOfMessage;
+    }
+    
+    public ArrayList<AbstractNetworkElement> getListOfServers() {
+        return listOfServers;
+    }
+
+    public void setListOfServers(ArrayList<AbstractNetworkElement> listOfServers) {
+        this.listOfServers = listOfServers;
+    }
+    
     public void loadMap() {
         try {
             BufferedReader file = new BufferedReader(new FileReader(
@@ -35,6 +58,7 @@ public class Network extends Plateau {
                 for (int c = 0; c < line.length(); c++) {
                     if (line.charAt(c) == 'S') {
                         elementMap[l][c] = new Server("CIS" + Integer.toString(l) + Integer.toString(c));
+                        listOfServers.add((AbstractNetworkElement) elementMap[l][c]);
                     } else {
                         elementMap[l][c] = new Link("Link" + Integer.toString(l) + Integer.toString(c));
                     }
@@ -54,6 +78,7 @@ public class Network extends Plateau {
         System.err.println("create connect");
         for (int i = 0; i < elementMap.length; i++) {
             for (int j = 0; j < elementMap[i].length; j++) {
+//                ((AbstractNetworkElement) elementMap[i][j]).setDistance(Double.MAX_VALUE);
                 if (i == 0) {
                     if (j == 0) {
                         new Edge((AbstractNetworkElement) elementMap[i][j], (AbstractNetworkElement) elementMap[i][j + 1], new Distance(1));

@@ -14,7 +14,10 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.network.Network;
+import model.network.Server;
 import model.network.interfaces.AbstractNetworkElement;
+import model.network.interfaces.Message;
+import model.network.mail.Mail;
 import module.backoffice.network.LoadModelNetwork;
 import module.backoffice.LoadModelFourmis;
 import module.backoffice.network.LaunchSimulation;
@@ -63,11 +66,29 @@ public class Dispatcher implements ActionListener {
         application.setMainFrame(new MapPPFrame(10, 10));
         new NetworkFrameInitializeur(application.getMainFrame()).execute();
         new LaunchSimulation().execute();
-        
+
     }
 
     public void nextStepAction() {
         System.err.println("Next step");
+        Network pl = (Network) application.getMap();
+        if (pl.getListOfMessage().size() < 4) {
+            Message message;
+            if (pl.getListOfMessage().size() == 2) {
+                AbstractNetworkElement networkElementStart = pl.getListOfServers().get(0);
+                AbstractNetworkElement networkElementEnd = pl.getListOfServers().get(4);
+                message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
+                networkElementStart.sendMessage(message);
+
+            } else {
+                AbstractNetworkElement networkElementStart = pl.getListOfServers().get(1);
+                AbstractNetworkElement networkElementEnd = pl.getListOfServers().get(6);
+                message = new Mail((Server) networkElementStart, "Hello panda 0", (Server) networkElementEnd);
+                networkElementStart.sendMessage(message);
+            }
+
+            pl.getListOfMessage().add(message);
+        }
         new SimulationInProgress().execute();
 
     }

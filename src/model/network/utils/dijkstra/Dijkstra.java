@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.network;
+package model.network.utils.dijkstra;
 
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
+import model.network.Network;
 import model.network.interfaces.AbstractNetworkElement;
 import panda.prod.application.PandaProdApplication;
 
@@ -24,7 +25,7 @@ public class Dijkstra {
      * @return next node to take the shorter way.
      */
     public static AbstractNetworkElement findeBestWay(AbstractNetworkElement start, String target) {
-        System.err.println("Durée de Dijkstra début : " + new Date(System.currentTimeMillis()).getTime());
+//        System.err.println("Durée de Dijkstra début : " + new Date(System.currentTimeMillis()).getTime());
         AbstractNetworkElement res = null, current;
         @SuppressWarnings("Convert2Diamond")
         HashMap<Edge, AbstractNetworkElement> log;
@@ -48,18 +49,26 @@ public class Dijkstra {
 
                 current = log.get(temp);
             }
-
+            
+            System.err.println("Other Distance : " + other.getName() + " " + other.getDistance() + " Current Distance : " + current.getName() + " " + (current.getDistance() + temp.getAttribute().getValue()));
             if (other.getDistance() > (current.getDistance() + temp.getAttribute().getValue())) {
+                System.err.println("Panda passe");
                 if (other.isActif() == false) {
+                    System.err.println("Panda passe2 other : " + other.getName() + " current : " + current.getName());
                     other.setDistance(temp.getAttribute().getValue() + current.getDistance());
                     other.previous = current;
                 }
             }
+//            System.err.println("Depart : " + current.getName());
+//            for(Edge e : current.getEdge()){
+//                System.err.println(e);
+//            }
             current.getEdge().remove(temp);
             current = temp.getOther(current);
             current.getEdge().remove(temp);
+
             if (current.getName().equals(target)) {
-                System.err.println("current " + current.getName());
+//                System.err.println("current " + current.getName());
                 res = current;
             }
         }
@@ -67,7 +76,7 @@ public class Dijkstra {
         Network network = (Network) PandaProdApplication.getApplication().getMap();
 
         network.createConnectNetwork();
-        System.err.println("Durée de Dijkstra fin : " + new Date(System.currentTimeMillis()).getTime());
+//        System.err.println("Durée de Dijkstra fin : " + new Date(System.currentTimeMillis()).getTime());
         return res;
     }
 

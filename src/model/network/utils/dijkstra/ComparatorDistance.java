@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package model.network;
+package model.network.utils.dijkstra;
 
 import java.util.Comparator;
 

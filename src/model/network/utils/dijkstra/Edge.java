@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.network;
+package model.network.utils.dijkstra;
 
 import java.util.ArrayList;
 import model.network.interfaces.AbstractNetworkElement;
@@ -24,7 +24,12 @@ public class Edge {
         this.elementTwo = elementTwo;
         this.value = value;
         this.elementOne.getEdge().add(this);
-        this.elementTwo.getEdge().add(this);
+        //this.elementTwo.getEdge().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Edge{" + "elementOne=" + elementOne.getName() + ", elementTwo=" + elementTwo.getName() + ", value=" + value + '}';
     }
 
     public Distance getAttribute() {

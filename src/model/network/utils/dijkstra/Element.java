@@ -1,4 +1,4 @@
-package model.network;
+package model.network.utils.dijkstra;
 
 
 public class Element{
