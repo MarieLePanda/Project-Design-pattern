@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import model.network.interfaces.Message;
 
-/**
- *
- * @author Lucas
- */
+
 public abstract class AbstractElement {
 
     protected ArrayList<AbstractElement> listPath = new ArrayList<AbstractElement>();

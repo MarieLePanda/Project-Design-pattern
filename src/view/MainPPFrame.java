@@ -36,12 +36,16 @@ public class MainPPFrame extends PandaProdFrame {
 
         pandaProdButtonNetworkSimulation = new view.component.PandaProdButton();
         pandaProdButtonFourmis = new view.component.PandaProdButton();
+        buttonCastlefight = new view.component.PandaProdButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Simulation Design Pattern");
 
         pandaProdButtonNetworkSimulation.setText("Simulation Réseau");
 
         pandaProdButtonFourmis.setText("Simulation Fourmilliere");
+
+        buttonCastlefight.setText("TOWER DEFENSE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -51,17 +55,20 @@ public class MainPPFrame extends PandaProdFrame {
                 .addGap(127, 127, 127)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pandaProdButtonFourmis, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pandaProdButtonNetworkSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pandaProdButtonNetworkSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonCastlefight, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(43, 43, 43)
+                .addComponent(buttonCastlefight, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addComponent(pandaProdButtonNetworkSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(48, 48, 48)
                 .addComponent(pandaProdButtonFourmis, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
@@ -103,6 +110,7 @@ public class MainPPFrame extends PandaProdFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.component.PandaProdButton buttonCastlefight;
     private view.component.PandaProdButton pandaProdButtonFourmis;
     private view.component.PandaProdButton pandaProdButtonNetworkSimulation;
     // End of variables declaration//GEN-END:variables
@@ -111,5 +119,6 @@ public class MainPPFrame extends PandaProdFrame {
     public void putComponents() {
         hsJcomponent.put("pandaProdButtonNetworkSimulation", pandaProdButtonNetworkSimulation);
         hsJcomponent.put("pandaProdButtonFourmis", pandaProdButtonFourmis);
+        hsJcomponent.put("pandaProdButtonCastlefight", buttonCastlefight);
     }
 }

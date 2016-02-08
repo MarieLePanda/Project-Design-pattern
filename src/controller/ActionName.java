@@ -11,7 +11,8 @@ public class ActionName {
 
     public static final String ChooseSimulation = "chooseSimulation",
             SimulationNetwork = "simulationNetwork",
-            SimulationFourmis = "simulationFourmis";
+            SimulationFourmis = "simulationFourmis",
+            SimulationCastlefight = "simulationCastlefight";
     
     
     public static final Color bg = new Color(1, 1, 1);
