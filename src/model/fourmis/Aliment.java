@@ -11,21 +11,21 @@ import interfaces.AbstractElement;
  *
  * @author Damien
  */
-public class Terrain extends AbstractElement{
+public class Aliment extends AbstractElementFourmi{
     
-   private Aliment aliment;
-   private Pheromone pheromone;
+    private int parts;
     
-    public Terrain(String n){
+    public Aliment(String n){
         this.name=n;
-        this.pheromone=null;
-        this.aliment=null;
+        this.parts=10;
     }
     
-    
-    public AjouterAliment(){
-        this.aliment=new Aliment("Aliment");
+    public int getPart(){
+        return this.parts;
     }
     
-    public boolean aAliment()
+    public void prendrePart(){
+        this.parts--;
+    }
+
 }

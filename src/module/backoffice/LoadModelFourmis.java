@@ -17,7 +17,7 @@ import panda.prod.application.PandaProdApplication;
 
 /**
  *
- * @author Lucas
+ * @author Damien
  */
 public class LoadModelFourmis implements IAction {
 

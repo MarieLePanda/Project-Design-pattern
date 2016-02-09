@@ -9,11 +9,24 @@ import interfaces.AbstractElement;
 
 /**
  *
- * @author Lucas
+ * @author Damien
  */
 public class Tunnel extends AbstractElement {
     
-    public Tunnel(String n){
+    private int abs;
+    private int ord;
+    
+    public Tunnel(String n, int a, int o){
         this.name=n;
+        this.abs=a;
+        this.ord=o;
+    }
+    
+    public int getAbscisse(){
+        return abs;
+    }
+    
+    public int getOrdonnee(){
+        return ord;
     }
 }

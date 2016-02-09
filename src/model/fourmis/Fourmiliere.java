@@ -10,23 +10,28 @@ import interfaces.Plateau;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import panda.prod.application.SystemSettings;
 
 /**
  *
- * @author Lucas
+ * @author Damien
  */
 public class Fourmiliere extends Plateau{
 
+    private ArrayList<Fourmi> listFourmi=new ArrayList<Fourmi>();
+    private int nbFourmi=0;
+    private int nbAliment=0;
+    
     @Override
     public void loadMap() {
         try {
             BufferedReader file = new BufferedReader(new FileReader(
                     "src" + SystemSettings.SEPARATOR
                     + "conf" + SystemSettings.SEPARATOR
-                    + "mapServer.txt"
+                    + "mapFourmiliere.txt"
             ));
             String line;
             int l = 0;
@@ -34,9 +39,9 @@ public class Fourmiliere extends Plateau{
             while ((line = file.readLine()) != null) {
                 for (int c = 0; c < line.length(); c++) {
                     if (line.charAt(c) == 'S') {
-                        elementMap[l][c] = new Terrain("Ter"+ Integer.toString(c));
+                        elementMap[l][c] = new Terrain("Ter"+ Integer.toString(l) + Integer.toString(c));
                     } else {
-                        elementMap[l][c] = new Tunnel("Tun"+ Integer.toString(c));
+                        elementMap[l][c] = new Tunnel("Tun"+ Integer.toString(l) + Integer.toString(c), l, c);
                     }
 
                 }
@@ -44,12 +49,13 @@ public class Fourmiliere extends Plateau{
             }
             file.close();
         } catch (IOException e) {
-            Logger.getLogger("FileIO").log(Level.SEVERE, "Erreur lors de la lecture du fichier de map serveur", e);
+            Logger.getLogger("FileIO").log(Level.SEVERE, "Erreur lors de la lecture du fichier de map fourmilière", e);
         }
         
         createConnect();
        
     }
+
     
     public void createConnect(){
         AbstractElement current;
@@ -69,6 +75,18 @@ public class Fourmiliere extends Plateau{
                     
                 }
             }
+        }
+    }
+
+    public void addFourmi(){
+        listFourmi.add(new Fourmi("fourmi", null));
+        nbFourmi++;
+    }
+    
+    public void update(){
+        for(Fourmi f : listFourmi)
+        {
+            //if(f.porteAliment())
         }
     }
 }
