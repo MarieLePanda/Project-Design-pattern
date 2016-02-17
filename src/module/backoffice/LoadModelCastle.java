@@ -7,6 +7,7 @@ package module.backoffice;
 
 import interfaces.action.IAction;
 import model.Castlefight;
+import model.FactoryPlateau;
 import panda.prod.application.PandaProdApplication;
 
 /**
@@ -18,7 +19,7 @@ public class LoadModelCastle implements IAction{
     @Override
     public boolean execute(Object... object) {
         PandaProdApplication application = PandaProdApplication.getApplication();
-        application.setMap(new Castlefight());
+        application.setMap(FactoryPlateau.getInstance().getCastlefight());
         application.getMap().loadMap();
         return true;
     }

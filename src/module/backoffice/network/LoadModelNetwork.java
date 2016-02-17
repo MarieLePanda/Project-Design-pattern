@@ -6,6 +6,7 @@
 package module.backoffice.network;
 
 import interfaces.action.IAction;
+import model.FactoryPlateau;
 import model.network.Network;
 import panda.prod.application.PandaProdApplication;
 
@@ -18,7 +19,7 @@ public class LoadModelNetwork implements IAction {
     @Override
     public boolean execute(Object... object) {
         PandaProdApplication application = PandaProdApplication.getApplication();
-        application.setMap(new Network());
+        application.setMap(FactoryPlateau.getInstance().getNetwork());
         application.getMap().loadMap();
         /*AbstractNetworkElement [][] network = application.getMap().getNetworkMap();
         for(int i = 0; i < network.length; i++){

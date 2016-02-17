@@ -57,10 +57,10 @@ public class Network extends Plateau {
             while ((line = file.readLine()) != null) {
                 for (int c = 0; c < line.length(); c++) {
                     if (line.charAt(c) == 'S') {
-                        elementMap[l][c] = new Server("CIS" + Integer.toString(l) + Integer.toString(c));
+                        elementMap[l][c] = FactoryNetworkElement.getInstance().getServer("CIS" + Integer.toString(l) + Integer.toString(c));
                         listOfServers.add((AbstractNetworkElement) elementMap[l][c]);
                     } else {
-                        elementMap[l][c] = new Link("Link" + Integer.toString(l) + Integer.toString(c));
+                        elementMap[l][c] = FactoryNetworkElement.getInstance().getLink("Link" + Integer.toString(l) + Integer.toString(c));
                     }
 
                 }
